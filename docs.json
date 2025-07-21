@@ -31,6 +31,14 @@
             ]
           },
           {
+            "group": "Development",
+            "pages": [
+              "development/captiveflask",
+              "development/pumpkinproxy",
+              "development/pluginmitm"
+            ]
+          },
+          {
             "group": "Customization",
             "pages": [
               "essentials/settings",
