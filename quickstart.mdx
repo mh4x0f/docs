@@ -1,80 +1,214 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: "Installation"
+description: "The wifipumpkin3 written in Python 3 , you will need to have a working Python (version 3.7 or later) on your machine."
 ---
 
-## Get started in three steps
+### OBS
 
-Get your documentation site running locally and make your first customization.
+- Windows is not supported.
+- Mac OS X is not supported. only docker version, but has been not tested.
 
-### Step 1: Set up your local environment
+### Requirements
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+You will need to have a Wi-Fi adapter that supports **Access-Point (AP) mode**. The following list of OSs represents recommended environments to run `wifipumpkin3` (wp3), as most of required dependencies are pre-installed. VMs or docker are also recommended.
 
-### Step 2: Deploy your changes
+### OS (recommended)
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+| OS     | Version         |
+| :----- | :-------------- |
+| Ubuntu | \> 18.04 LTS    |
+| Docker | \> Ubuntu 18.04 |
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+### Tools (pre-installed)
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+- iptables (current: iptables v1.6.1)
+- iw (current: iw version 4.14)
+- net-tools (current: version (1.60\+)
+- wireless-tools (current: version 30~pre9-12)
+- hostapd (current: hostapd v2.6)
 
-### Step 3: Go live
+### Based on Debian procedure
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+wifipumpkin3 use the port 53 for mount python dns server, when i try to install on Ubuntu 18.04, i got somes error because this "port 53 is used by another process". This problem is caused by systemd-resolved to solve only follow the step bellow.
 
-## Next steps
+1. stop systemd-resolved " sudo systemctl stop systemd-resolved"
+2. edit /etc/systemd/resolved.conf with these
 
-Now that you have your docs running, explore these key features:
+![dnssettings](https://miro.medium.com/max/1400/1*5qhtKSKUsvAXyWq73V1hiw.png)
 
-<CardGroup cols={2}>
+3. and execute this link file
 
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
+> sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
+![ln_file](https://miro.medium.com/max/1400/1*1dSK1osF9ktfH7gPFBpR7g.png)
 
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
+And done \!\! font [Nitin Gurbani](https://medium.com/@niktrix/getting-rid-of-systemd-resolved-consuming-port-53-605f0234f32f)
 
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
+### Installation procedure
 
-</CardGroup>
+if you've **python 3.7 or later** installed on your machine, it very simple to install the **Wp3**. Follow the steps:
+
+### Debian/Ubuntu
+
+It is highly recommended install somes system packages, os-level dependencies.
+
+```sh
+sudo apt install python3.7-dev libssl-dev libffi-dev build-essential python3.7
+```
+
+```sh
+ $ git clone https://github.com/P0cL4bs/wifipumpkin3.git
+ $ cd wifipumpkin3
+ $ sudo make install
+```
+
+or grab a Debian `*.deb` package from GitHub [Releases](https://github.com/P0cL4bs/wifipumpkin3/releases)
+
+```sh
+$ sudo dpkg -i wifipumpkin3-1.0.0-all.deb 
+```
+
+### Install on Kali Linux ( 2022.2 ) or high
+
+wp3 can be install from `apt` command.
+
+```sh
+$ sudo apt install wifipumpkin3
+```
+
+### Install on Kali Linux
+
+the Kali Linux by default has installed **python3.8** is compartible with `wp3`, I recommend to install some system packages, os-level dependencies.
+
+```sh
+ $ sudo apt install libssl-dev libffi-dev build-essential
+ $ git clone https://github.com/P0cL4bs/wifipumpkin3.git
+ $ cd wifipumpkin3
+```
+
+now, we need to install the `PyQt5`, it very easy:
+
+```sh
+sudo apt install python3-pyqt5
+```
+
+or check if the pyqt5 is installed successful:
+
+```python
+python3 -c "from PyQt5.QtCore import QSettings; print('done')"
+```
+
+now, if you got the message `done`, nice. the next step is install the `wp3`:
+
+```sh
+ $ sudo python3 -m pip install .
+```
+
+if you see this message bellow, everything ok \!
+
+> Finished processing dependencies for wifipumpkin3==1.0.0
+
+now, let's execute the app:
+
+```
+$ sudo  wifipumpkin3
+```
+
+all done, will be see the CLI of `wp3`.
+
+### Installation python virtualenv
+
+Virtualenv is a tool used to create an isolated Python environment. Virtualenv is the easiest and recommended way to configure a custom Python environment.
+
+:::warning version of PyQt5
+To install, change the version in `requirements.txt` from `PyQt5==5.14.0` to `PyQt5==5.14.2`.
+
+This version (`5.14.2`) works fine on virtual environments without errors related to `python-sip` dependencies.
+:::
+
+```sh
+$ sudo python3.7 -m pip install --upgrade pip
+$ git clone https://github.com/P0cL4bs/wifipumpkin3.git
+$ cd wifipumpkin3
+$ sudo python3.7 -m pip install virtualenv
+```
+
+now, you need execute with superuser `root`:
+
+```
+# virtualenv -p python3.7 venv
+# source venv/bin/activate
+# make install_env
+```
+
+if you see this message bellow, everything ok \!
+
+> Finished processing dependencies for wifipumpkin3==1.0.0
+
+now, let's execute the app:
+
+```
+# wifipumpkin3
+```
+
+all done, will be see the CLI of `wp3` on virtualenv activated.
+
+When finished working in the virtual environment, you can deactivate it by running the following:
+
+```
+# deactivate
+```
+
+### Installation on Docker Container
+
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. the `wp3` is full compatible to run on docker container. let's go:
+
+> https://docs.docker.com/get-docker/
+
+with docker.io installed and working fine, let's take a look how to mount a container with `wp3`. [how to install on ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
+```bash
+$ git clone https://github.com/P0cL4bs/wifipumpkin3.git
+$ cd wifipumpkin3
+$ sudo docker build -t "wifipumpkin3" .
+```
+
+this commands above will download and build a new container for us called `wifipumpkin3`, You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message:
+
+> Successfully tagged wifipumpkin3
+
+Now you need to run your image as a container, start a container based on your new image:
+
+```bash
+$ sudo docker run --privileged -ti --rm --name wifipumpkin3 --net host "wifipumpkin3" 
+```
+
+all done, will be see the CLI of `wp3` on docker with mode docker activated. ;)
+
+### Installation on Docker-compose
+
+Using the docker-compose.yml you can install the `w p3`. follow the steps,\
+to build the image just run.
+
+```bash
+$ docker-compose build wifipumpkin3
+```
+
+To run a container
+
+```bash
+$ sudo docker-compose run wifipumpkin3 wifipumpkin3
+```
+
+To run a container with a pulp file
+
+```sh
+$ sudo docker-compose run wifipumpkin3 wifipumpkin3 --pulp scripts/demo.pulp
+```
+
+all done, will be see the CLI of `wp3` on docker with mode docker activated.
+thank's [@rafonsecad](https://github.com/rafonsecad)
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  **Need help?** See our [full documentation](https://docs.wifipumpkin3.com) or join our [community](https://discord.gg/7EGAXyd3).
 </Note>
