@@ -11,7 +11,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Community",
         "groups": [
           {
             "group": "Getting started",
@@ -48,7 +48,7 @@
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Pro",
         "groups": [
           {
             "group": "API documentation",
@@ -80,7 +80,7 @@
             "group": "Tutorials",
             "pages": [
               "blog/tutorials/captiveflask",
-              "tutorials/phishkin3"
+              "blog/tutorials/phishkin3"
             ]
           }
         ]
@@ -95,7 +95,7 @@
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://docs.wifipumpkin3.com/blog",
           "icon": "newspaper"
         }
       ]
