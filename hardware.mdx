@@ -1,0 +1,28 @@
+---
+title: "Hardware"
+description: "About wireless adapter and your kernel driver must support AP mode."
+---
+
+### About wireless adapters
+Your wireless adapter and your kernel driver must support AP mode. In order to check this, execute this shell command:
+``` sh
+ iw list
+```
+If there is 'AP' in the list of "Supported interface modes", your card has support for the desired mode.
+
+### Another method:
+* Find your kernel driver module in use by issuing the below command:
+``` sh
+ lspci -k | grep -A 3 -i network
+```
+(example module: ath9k)
+next, use the below command to find out your wifi capabilities (replace ath9k by your kernel driver):
+``` sh
+modinfo ath9k | grep depend
+```
+If the above output includes "mac80211" then it means your wifi card will support the AP mode.
+
+ The adapter needs to have drivers for GNU/Linux.
+* another website list devices supported [here](http://elinux.org/RPi_USB_Wi-Fi_Adapters)
+* check kernel drive [wireless.wiki](https://wireless.wiki.kernel.org/en/users/drivers)
+* [alfa.docs](https://docs.alfa.com.tw/Support/Linux/AR9271/)
