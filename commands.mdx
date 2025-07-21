@@ -1,0 +1,168 @@
+---
+title: 'Commands'
+description: 'interactive session like the metasploit framework.'
+---
+
+### Interactive Session
+
+Once started the tool with `sudo wifipumpkin3` ,  you'll be presented with an interactive session like the `metasploit framework` where you can enable or disable modules, plugin, proxy configure the ap and etc. 
+
+The interface CLI is very simple, basic commands you'll need to perform operations such as setting a session like accesspoint (AP) information (bssid, channel, interface), start/stop accesspoint and monitor clients activitys joined on AP.
+
+### Pulps
+
+ `Pulps` makes reference to pulp taken from a pumpkin, which can be used for various mixtures. It is possible to script your interactive session using pulps files.  Pulps (script files with a .pulp extension) are a powerful way to automate your attack, like metasploit's `.rc` files, where each line of the file is a command that'll be executed one for one.
+
+let's take a look, how to create a script for set the interface, enable to start without proxy,set ssid the network, set work without log for dns and start the access point.
+
+```python
+# configure the interface
+set interface wlan1 
+# set name of access point will be created
+set ssid demo
+# set noproxy plguin
+set proxy noproxy
+# ignore all log from pydns_server 
+ignore pydns_server
+# start the Access Point
+start
+```
+
+Once saved as demo.pulp file, you'll be able to load and execute it via:
+
+```bash
+sudo wifipumpkin3 --pulp /path/to/demo.pulp
+```
+
+if you not want to use .pulp file, exist a options to use the paraments --xpulp or -x and each command can either be executed singularly, or concatenated by the `;` in string. for example:
+
+```bash
+sudo wifipumpkin3 --xpulp "set interface wlan1; set ssid demo; set proxy noproxy; start"
+```
+
+### Arguments Commands
+
+The basic command line arguments ( wifipumpkin3 -h ) are:
+
+```bash
+-i INTERFACE 
+```
+Network interface to bind to, if empty the default interface is old session started.
+
+```bash
+-s SESSION
+```
+Session for continue attack, if you pass the old session id, all log will be added on same session.
+
+```bash
+--pulp PULP
+```
+Interactive sessions can be scripted with .pulp file,a powerful way to automate your attack.
+
+```bash
+--xpulp XPULP
+```
+each command can either be executed singularly, or concatenated by the ; in string.
+
+```bash
+--wireless-mode WIRELESS_MODE
+```
+Use this options for set the wireless mode (static, docker), by default is `static`  mode, but you can change if you want to run on docker container.
+
+```bash
+--no-colors
+```
+disable terminal colors and effects.
+
+```bash
+-v, --version
+```
+show program's version number and exit.
+
+### Core Commands
+
+>  `help`
+
+Will list all available commands avaliable
+
+> `clients`
+
+show all clients connected on Access Point with advanced UI
+
+> `ap`
+
+show all variable and status for settings AP. You can see (`bssid`, `ssid`, `channel`, `security`,  or `status ap`)
+
+> `set`
+
+set variable proxy,plugin and access point, this command set is like metasploit `set` command.
+
+> `unset`
+
+unset variable commnd hostapd_config
+
+> `start`
+
+start access point (AP), if not something wrong the will be see a new AP with hostapd program. also the proxy,plugin should be initialized.
+
+> `stop`
+
+stop access point, process, thread, plugin and proxies that is running in background.
+
+> `ignore`
+
+the message logger will be ignored, the parameters can be ( `captiveflask`,  `pumpkinproxy`,  `pydns_server`  `sniffkin3` ). if you type this command not  be see anymore log in console WP.
+
+> `restore`
+
+the message logger will be restored, as you can see above this command is inverse of `ignore` with same parameters will be restore the console log.
+
+> `info`
+
+get info from the proxy/plugin, this command show some informations of proxy/plugin like (log path, config path, description )
+
+> `jobs`
+
+show all threads/processes in background. Sometimes you need to find the process id or thread name of process created by WP.
+
+> `mode`
+
+show all wireless mode available.
+
+> `plugins`
+
+show all plugins available and their status.
+
+> `proxies`
+
+show all proxies available and their status.
+
+
+> `show`
+
+show available modules.
+
+> `search`
+
+search  modules by name, this will be implemented in the future when milion od modules :sunglasses: is avaliable 
+
+
+> `use`
+
+select module for modules, full inspiration in metasploit modules.
+
+> `dump`
+
+dump informations from client connected on AP.
+
+> `dhcpconf`
+
+show/choise dhcp server configuration
+
+> `dhcpmode`
+
+show/set all available dhcp server.
+
+> `update` (deprecated)
+
+pulling updates from remote git repository.

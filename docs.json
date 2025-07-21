@@ -22,6 +22,15 @@
             ]
           },
           {
+            "group": "Usage",
+            "pages": [
+              "commands",
+              "plugins",
+              "modules",
+              "proxies"
+            ]
+          },
+          {
             "group": "Customization",
             "pages": [
               "essentials/settings",

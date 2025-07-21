@@ -1,0 +1,24 @@
+---
+title: 'Plugins'
+description: 'The plugins are designed to add features to WP3 core and run parallel with access point (AP), WP3 provides facilities to develop plugins.'
+---
+
+### Plugins
+
+The plugins are designed to add features to WP3 core and run parallel with access point (AP), WP3 provides facilities to develop plugins. Generally speaking, there is really a few things you have to do in order to get a plugin working. 
+
+{% include alert.html type="info" content="The most important is you can run multi plugins simultaneously, because the plugins has been designed to work only monitor and analyse the traffic generate by users connected on access point." %}
+
+The basic command guidelines to get a plugins are:
+
+if you want to enable or disable the plugin, follow command bellow.
+```bash
+wp3 > set plugin plugin_name true/false
+```
+
+if the plugin has subplugins, when type `plugins` you see somes options for set. you can to enable/disable subplugins with command, type `tab` to autocomplete ;): 
+```bash
+wp3 > set plugin_name.subplugins_name true/false
+```
+
+Plugin developers and users are welcome to include your plugin into this project, take a look the guidelines [how to create a plugin](#development).
