@@ -77,12 +77,10 @@
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Tutorials",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "blog/tutorials/captiveflask",
+              "tutorials/phishkin3"
             ]
           }
         ]
