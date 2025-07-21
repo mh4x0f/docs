@@ -39,6 +39,13 @@
             ]
           },
           {
+            "group": "Settings",
+            "pages": [
+              "settings/structure",
+              "settings/logs"
+            ]
+          },
+          {
             "group": "Customization",
             "pages": [
               "essentials/settings",
