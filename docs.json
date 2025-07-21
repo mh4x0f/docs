@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "wifipumpkin3",
   "colors": {
     "primary": "#b3443b",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "light": "#b3443b",
+    "dark": "#786abf"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -17,32 +17,32 @@
             "group": "Getting started",
             "pages": [
               "index",
-              "installation",
-              "hardware"
+              "community/installation",
+              "community/hardware"
             ]
           },
           {
             "group": "Usage",
             "pages": [
-              "commands",
-              "plugins",
-              "modules",
-              "proxies"
+              "community/commands",
+              "community/plugins",
+              "community/modules",
+              "community/proxies"
             ]
           },
           {
             "group": "Development",
             "pages": [
-              "development/captiveflask",
-              "development/pumpkinproxy",
-              "development/pluginmitm"
+              "community/development/captiveflask",
+              "community/development/pumpkinproxy",
+              "community/development/pluginmitm"
             ]
           },
           {
             "group": "Settings",
             "pages": [
-              "settings/structure",
-              "settings/logs"
+              "community/settings/structure",
+              "community/settings/logs"
             ]
           }
         ]
@@ -51,18 +51,9 @@
         "tab": "Pro",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Documentation",
             "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "pro/introduction"
             ]
           }
         ]
@@ -91,7 +82,7 @@
         {
           "anchor": "Community",
           "href": "https://discord.gg/jywYskR",
-          "icon": "slack"
+          "icon": "discord"
         },
         {
           "anchor": "Blog",
@@ -115,7 +106,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://wifipumpkin3.com/dashboard"
     }
   },
   "footer": {
