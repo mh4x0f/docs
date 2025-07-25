@@ -80,7 +80,7 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Community",
+          "anchor": "Join the Discord",
           "href": "https://discord.gg/jywYskR",
           "icon": "discord"
         },
@@ -106,7 +106,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://wifipumpkin3.com/dashboard"
+      "href": "https://wifipumpkin3.com"
     }
   },
   "footer": {
