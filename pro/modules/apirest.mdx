@@ -1,0 +1,78 @@
+---
+title: "api.rest"
+description: "Overview and usage of the WP3 Pro RESTful API."
+icon: "server"
+---
+
+# API REST (`api.rest`)
+
+The **`api.rest`** module provides a **RESTful API** for WP3 Pro, enabling programmatic interaction with modules, proxies, and configurations.  
+This allows integration with third-party tools, automation scripts, and remote management.
+
+---
+
+### Module Usage
+
+```bash
+wp3-pro > api.rest on      # Start the REST API
+wp3-pro > api.rest off     # Stop the REST API
+```
+
+### Description
+
+- **api.rest** (running): The WP3 Pro RESTful API interface.
+
+Purpose: Start or stop the REST server used for external communication and automation.
+
+### API REST Parameters
+
+| Parameter             | Description                                                           | Default     |
+|-----------------------|-----------------------------------------------------------------------|-------------|
+| `api.rest.address`     | Address to bind the API REST server to.                              | 127.0.0.1   |
+| `api.rest.alloworigin` | Value for the Access-Control-Allow-Origin header (CORS control).     | *           |
+| `api.rest.certificate` | Path to the API TLS certificate for HTTPS.                           | (empty)     |
+| `api.rest.key`         | API JWT secret key (default is randomly generated).                  | (random)    |
+| `api.rest.password`    | API authentication password.                                         | user        |
+| `api.rest.port`        | Port where the REST API listens.                                     | 8083        |
+| `api.rest.username`    | API authentication username.                                         | user        |
+
+
+### Examples
+
+Start the REST API on default parameters:
+```bash
+wp3-pro > api.rest on
+```
+Change the default port and enable HTTPS:
+```bash
+wp3-pro > set api.rest.port 9090
+wp3-pro > set api.rest.certificate /etc/wp3/certs/cert.pem
+wp3-pro > api.rest on
+```
+
+Set custom authentication credentials:
+```bash
+wp3-pro > set api.rest.username admin
+wp3-pro > set api.rest.password strongpassword123
+```
+
+### Security Notes
+<Warning>
+Default credentials are user:user.It is highly recommended to change them before exposing the API.
+Use TLS certificates (api.rest.certificate) to secure communication with HTTPS.
+Restrict the binding address (api.rest.address) to prevent unauthorized access, e.g., keep 127.0.0.1 unless remote control is required.
+</Warning>
+
+### Summary
+
+The api.rest module provides:
+
+A fully RESTful API to control WP3 Pro.
+
+- CORS support via alloworigin.
+- TLS support for secure communication.
+- Authentication with configurable username and password.
+
+<Note>
+💡 Tip: Combine api.rest with automation scripts to create custom workflows or integrate WP3 Pro into larger testing frameworks.
+</Note>

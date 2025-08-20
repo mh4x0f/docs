@@ -1,0 +1,65 @@
+---
+title: "web.ui"
+description: "Overview and usage of the WP3 Pro Web User Interface."
+icon: "globe"
+---
+
+# Web UI (`web.ui`)
+
+<Card title="web.ui" img="/images/pro/modules/web.ui.png">
+    web.ui Web UI Interface
+</Card>
+
+The **`web.ui`** module provides the **graphical Web User Interface** for WP3 Pro.  
+It allows users to interact with the application through a browser, offering easy access to module controls, settings, and monitoring features.
+
+---
+
+### Module Usage
+
+```bash
+wp3-pro > web.ui on       # Start the Web UI
+wp3-pro > web.ui off      # Stop the Web UI
+```
+
+### Description:
+
+- **web.ui** (running): The WP3 Pro Web UI interface.
+
+Purpose: Start or stop the web server that serves the graphical interface.
+
+### Web UI Parameters
+
+| Parameter       | Description                                | Default    |
+|-----------------|--------------------------------------------|-----------|
+| `web.ui.address` | Address to bind the Web UI server to.     | 127.0.0.1 |
+| `web.ui.path`    | Folder containing the Web UI files.       | ui        |
+| `web.ui.port`    | Port on which the Web UI server listens.  | 80        |
+
+
+### Examples
+Start the Web UI on the default address and port:
+```bash
+wp3-pro > web.ui on
+```
+Bind the Web UI to a custom address and port:
+```bash
+wp3-pro > set web.ui.address 0.0.0.0
+wp3-pro > set web.ui.port 8080
+wp3-pro > web.ui on
+```
+Stop the Web UI:
+```bash
+wp3-pro > web.ui off
+```
+### Summary
+
+The web.ui module provides:
+
+- A browser-based interface to control WP3 Pro.
+- Easy access to modules, proxies, and monitoring tools.
+- Configurable address and port for flexibility in network environments.
+
+<Note>
+💡 Note: The default login credentials for the Web UI are user:user. Make sure to change these for production or sensitive environments.
+</Note>

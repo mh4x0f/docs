@@ -1,0 +1,136 @@
+---
+title: "Structure YAML"
+description: "Detailed explanation of how a Flowtamper template works in WP3 Pro."
+icon: "file-code"
+---
+
+This template demonstrates how Flowtamper can **intercept, modify, and extract data** from API GET requests in real-time.
+
+---
+
+## Template Metadata
+
+```yaml
+id: "inject-api-header"
+
+info:
+  name: "Inject header in API"
+  author: dev
+  enabled: true
+  tags: ["api", "debug"]
+  category: "modification"
+  description: "Injects custom header and removes caching for API GET requests to '/'"
+```
+
+- **id** → Unique identifier of the template.
+- **info** → Metadata including name, author, tags, category, and description.
+- **enabled** → Indicates if the template is active.
+- **tags** → Keywords for filtering and organizing templates.
+
+### Summary
+
+This template shows how Flowtamper can:
+- Intercept API requests based on host, path, method, and headers.
+- Modify both request and response headers.
+- Replace content in request or response bodies.
+- Extract specific data using regex-based extractors.
+
+It is a practical example for API testing, debugging, or penetration testing scenarios where you need full control over HTTP/HTTPS communication.
+
+### Match Rules
+
+Defines which requests Flowtamper will intercept and process.
+You can filter by host, path, HTTP method, and header patterns.
+
+```yaml
+match:
+  host_regex: ".*"
+  method: "GET"
+  path_regex: "/"
+  headers_matchers:
+    User-Agent: ".*"
+```
+
+- **host_regex** → Match any host (.*).
+- **method** → Only intercept GET requests.
+- **path_regex** → Matches requests to /.
+- **headers_matchers** → Only requests with a User-Agent header are intercepted.
+
+These rules define which requests Flowtamper will act on.
+
+
+### Actions
+
+Defines what modifications Flowtamper will perform on intercepted requests and responses.
+
+#### Request Modifications
+
+Describes the changes applied to outgoing client requests before they reach the server.
+
+```yaml
+actions:
+  request:
+    add_headers:
+      X-Custom-Header: "Intercepted"
+    remove_headers:
+      - "Cache-Control"
+    replace_body:
+      - match_regex: "foo"
+        replace: "bar"
+```
+
+- **add_headers** → Injects a custom header X-Custom-Header.
+- **remove_headers** → Removes caching headers to force fresh responses.
+- **replace_body** → Replaces occurrences of foo with bar in the request body.
+
+#### Response Modifications
+
+Describes the changes applied to incoming server responses before they reach the client.
+
+```yaml
+  response:
+    status: [200]
+    add_headers:
+      X-Proxy: "go-mitmproxy"
+    remove_headers:
+      - "Cache-Control"
+    replace_body:
+      - match_regex: "(?i)(<body[^>]*>)"
+        replace: "${1}<h1>go-mitmproxy</h1>"
+```
+
+- **status** → Apply modifications only to responses with status 200.
+- **add_headers** → Inject a custom response header.
+- **remove_headers** → Remove caching headers.
+- **replace_body** → Inject an HTML h1 tag inside the body element of the response.
+
+### Extractors
+
+Defines rules to extract specific data from intercepted requests or responses.
+
+```yaml
+extractors:
+  - type: regex
+    name: csrf_token
+    part: body
+    group: 1
+    regex:
+      - '<input\s+name="csrf_token"\s+type="hidden"\s+value="([[:alnum:]]{16})"\s*/?>'
+  - type: regex
+    name: title
+    part: body
+    group: 1
+    regex:
+      - '<title>(.*)<\/title>'
+```
+
+- **type** → Defines the extraction method (regex).
+- **name** → Variable name to store extracted value.
+- **part** → Part of the message to extract from (body).
+- **group** → Regex capture group.
+- **regex** → Regular expression used to capture specific data.
+
+Example:
+
+- csrf_token extracts a hidden input token from the HTML body.
+- title extracts the content of the title tag.

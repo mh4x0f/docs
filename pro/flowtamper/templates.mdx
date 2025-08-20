@@ -1,0 +1,31 @@
+---
+title: "Templates"
+description: "List of templates available for Flowtamper"
+icon: "list"
+---
+This page lists the currently available **Flowtamper templates**.  
+
+Each template defines rules for intercepting, modifying, or extracting data from HTTP/HTTPS requests and responses.  
+Templates can be used for API debugging, web traffic analysis, or penetration testing scenarios.  
+
+<Card title="Flowtamper templates" img="/images/pro/flowtamper/templates.png">
+    Flowtamper Templates Web UI Interface
+</Card>
+
+Use the templates as-is or customize them to suit specific testing needs.  
+
+
+### Available Flowtamper Templates
+
+| ID                        | Name                                  | Author      | Enabled | Tags                               | Category      | Description                                                                 |
+|----------------------------|---------------------------------------|-------------|---------|------------------------------------|---------------|-----------------------------------------------------------------------------|
+| capture-security-misconfig | Capture Insecure Security Headers     | pentest-dev | true    | owasp, headers, a05                | detection     | Detects missing security headers like CSP, HSTS, X-Frame-Options            |
+| extract-sql-errors         | Extract SQL Error Messages            | pentest-dev | true    | owasp, sql, a03                    | detection     | Captures SQL error messages in responses                                    |
+| disable-cache              | Disable Cache in All Responses        | dev         | true    | cache, headers                     | modification  | Forces all responses to disable caching for better interception             |
+| extract-api-keys           | Extract API Keys                      | dev         | true    | api, keys, sensitive               | exfiltration  | Extracts API keys leaked in JSON or headers                                 |
+| extract-auth-tokens        | Extract Authentication Tokens         | pentest-dev | true    | owasp, auth, a07                   | exfiltration  | Extracts JWT, Bearer tokens and session IDs from responses and headers       |
+| extract-js-secrets         | Extract secrets from JavaScript       | dev         | true    | javascript, tokens, secrets        | exfiltration  | Extracts sensitive info (tokens, URLs, keys) from JS responses              |
+| extract-sensitive-data     | Extract Sensitive Data                | pentest-dev | true    | owasp, sensitive, a02              | exfiltration  | Extracts credit cards, emails and CPF numbers from responses                |
+| extract-server-version     | Extract Server and Framework Versions | pentest-dev | true    | owasp, server, a06                 | exfiltration  | Extracts server and framework versions from headers and body                |
+| extractor-session-cookie   | Extract session cookie                | dev         | true    | auth, cookie, pentest              | modification  | Injects fake session cookie and strips security headers                     |
+

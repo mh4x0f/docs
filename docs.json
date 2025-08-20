@@ -53,7 +53,44 @@
           {
             "group": "Documentation",
             "pages": [
-              "pro/introduction"
+              "pro/introduction",
+              "pro/installation",
+              "pro/hardware"
+            ]
+          },
+          {
+            "group": "Usage",
+            "pages": [
+              "pro/commands",
+              "pro/modules",
+              "pro/proxies"
+            ]
+          },
+          {
+            "group": "Modules",
+            "pages": [
+              "pro/modules/netsniff",
+              "pro/modules/wifirecon",
+              "pro/modules/webui",
+              "pro/modules/apirest",
+              "pro/modules/eventstream",
+              "pro/modules/update"
+            ]
+          },
+          {
+            "group": "Phishportal",
+            "pages": [
+              "pro/phishportal/introduction",
+              "pro/phishportal/structure",
+              "pro/phishportal/templates"
+            ]
+          },
+          {
+            "group": "Flowtamper",
+            "pages": [
+              "pro/flowtamper/introduction",
+              "pro/flowtamper/structure",
+              "pro/flowtamper/templates"
             ]
           }
         ]
