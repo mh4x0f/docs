@@ -1,0 +1,87 @@
+---
+title: "event.stream"
+description: "Overview and usage of the WP3 Pro Event Stream module."
+icon: "wave-pulse"
+---
+
+# Event Stream (`event.stream`)
+
+<Card title="event.stream" img="/images/pro/modules/eventstream.png">
+    event.stream Web UI Interface
+</Card>
+
+The **Event Stream Module** provides real-time monitoring of system events inside **WP3 Pro**.  
+It allows you to start or stop the event stream, display logs, and filter the events being captured.  
+This is especially useful during pentesting sessions where tracking live activity is critical.
+
+---
+
+## Available Commands
+
+### `event.stream`
+
+- **Description**: Start or stop the live event stream.  
+
+```bash
+  wp3-pro > event.stream on
+  wp3-pro > event.stream off
+```
+
+### `event.stream.log`
+
+- **Description**: Enable or disable logging of event streams. 
+
+```bash
+wp3-pro > event.stream.log on
+wp3-pro > event.stream.log off
+```
+
+### `event.stream.show`
+
+- **Description**: Display the last NUMBER of events in the stream.
+
+```bash
+wp3-pro > event.stream.show 20
+```
+
+### `event.stream.include`
+
+- **Description**: Include only specific events in the output based on a filter.
+
+```bash
+wp3-pro > event.stream.include FILTER
+```
+
+### `event.stream.ignore`
+
+- **Description**: Exclude specific events from the output based on a filter.
+
+```bash
+wp3-pro > event.stream.ignore FILTER
+```
+
+### Parameters
+
+### `event.stream.logfile`
+
+- **Description**:Define the file where streamed events will be written.
+Default: (empty)
+
+```bash
+  wp3-pro >set event.stream.logfile log.txt
+```
+
+### `event.timestamps`
+
+- **Description**: Enable or disable timestamps for each event in the stream.
+Default: **true**
+
+```bash
+  wp3-pro >set event.timestamps true # default value is true
+```
+
+<Note>
+The `event.stream` module is running by default to provide live monitoring.
+Filters allow you to fine-tune what events you see or log, avoiding unnecessary noise.
+Logs can be redirected to external files for further analysis or archival.
+</Note>

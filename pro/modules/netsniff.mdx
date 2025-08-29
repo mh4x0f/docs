@@ -1,0 +1,71 @@
+---
+title: "net.sniff"
+description: "Overview and usage of the net.sniff module in WP3 Pro."
+icon: "network-wired"
+---
+
+# Net Sniffer (`net.sniff`)
+
+<Card title="net.sniff" img="/images/pro/modules/net.sniff.png">
+    net.sniff Web UI Interface
+</Card>
+
+The **`net.sniff`** module in WP3 Pro allows you to **sniff network packets in the background**.  
+It is designed to run silently and capture traffic for analysis, debugging, or penetration testing purposes.
+
+When started, it can capture packets from specified interfaces, apply filters, and optionally store the results in a file.
+
+---
+
+## Module Usage
+
+```bash
+wp3-pro > net.sniff on      # Start the network sniffer
+wp3-pro > net.sniff off     # Stop the network sniffer
+```
+
+
+ ### Description
+
+- net.sniff (not running): Sniffs packets in the background.
+
+Purpose: Start or stop a network sniffer that captures packets silently.
+
+### Parameters
+
+You can configure net.sniff using the following parameters:
+
+| Parameter                | Description                                                                 | Default                        |
+|--------------------------|-----------------------------------------------------------------------------|--------------------------------|
+| `net.sniff.broadcast`    | Send packets to all processors.                                             | false                          |
+| `net.sniff.filter`       | BPF filter for the sniffer (e.g., tcp or udp).                             | tcp or udp                     |
+| `net.sniff.interface`    | Interface to sniff packets from (e.g., wlan0).                             | (none)                         |
+| `net.sniff.output`       | File where captured packets will be saved.                                  | (none)                         |
+| `net.sniff.protocol`     | Protocol processors to use when broadcast is false. Options: http, dns, sni, ftp, smtp, mdns, ssdp | http, dns, sni, ftp, smtp, mdns, ssdp |
+| `net.sniff.verbose`      | Enable verbose mode to log packets in real-time.                            | false                          |
+
+### Examples CLI 
+
+Start the sniffer on a specific interface and save output to a file:
+```bash
+wp3-pro > set net.sniff.interface wlan0
+wp3-pro > set net.sniff.output /tmp/capture.pcap
+wp3-pro > net.sniff on
+```
+
+Enable verbose mode to see packets in real-time:
+```bash
+wp3-pro > set net.sniff.verbose true
+wp3-pro > net.sniff on
+```
+
+Filter traffic to capture only HTTP packets:
+```bash
+wp3-pro > set net.sniff.filter tcp
+wp3-pro > net.sniff.on
+```
+
+Summary
+
+The net.sniff module is a lightweight, configurable packet sniffer integrated into WP3 Pro.
+It allows you to monitor network traffic in the background, apply filters, capture specific protocols, and save packets for later analysis.

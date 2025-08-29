@@ -1,0 +1,110 @@
+---
+title: "Installation"
+description: ""
+icon: "terminal"
+---
+
+### OBS
+
+- Windows and Mac OS X is not supported.
+- Only Linux amd64 (arm64 future)
+
+### Requirements
+
+To run `wifipumpkin3-pro`, you will need a Wi-Fi adapter that supports **Access Point (AP) mode**. The operating systems listed below are recommended, as they already include most of the required dependencies or more easily to install.
+
+<Note>💡 For better performance and isolation, it is recommended to run `wifipumpkin3-pro` inside a virtual machine (VM) or on a dedicated physical machine.</Note>
+
+### OS (recommended)
+
+| OS     | Version         |
+| :----- | :-------------- |
+| Ubuntu | \>= 24.04 LTS    |
+| Kali | \>= Kali Linux 2025.2 |
+
+### Tools (pre-installed)
+
+- iptables (current: iptables v1.6.1)
+- iw (current: iw version 4.14)
+- net-tools (current: version (1.60\+)
+- wireless-tools (current: version 30~pre9-12)
+- hostapd (current: hostapd v2.6)
+
+
+---
+
+<iframe  className="w-full aspect-video rounded-xl" src="https://player.vimeo.com/video/1112068743?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+ title="How to Install and Activate wifipumpkin3 Pro on Linux">
+</iframe>
+
+#### 1️⃣ Download the Release
+Download the latest version of `wifipumpkin3-pro` from the **Dashboard**.  
+![Download from dashboard](/images/pro/installation/downloads.png)
+
+After downloading, you should have a file like:
+```bash
+wifipumpkin3-pro_linux_amd64.zip
+```
+
+---
+
+#### 2️⃣ Extract the Package
+Unzip the downloaded file and navigate to the extracted directory:
+
+```bash
+unzip wifipumpkin3-pro_linux_amd64.zip
+cd wifipumpkin3-pro_linux_amd64
+```
+---
+
+#### 3️⃣ Download License Files
+From the Dashboard -> License go to:
+
+![Download from dashboard](/images/pro/installation/license.png)
+
+Move them to the extracted folder:
+Example directory structure after moving the licenses:
+```bash
+linux :: ~/tests/wifipumpkin3-pro_linux_amd64 » ls
+bin  configs  install.sh  license.key  license.lic  ui
+```
+
+#### 4️⃣ Run the Installer
+Execute the installation script as root:
+
+```bash
+sudo ./install.sh
+=== wifipumpkin3-pro Installer ===
+[INFO] Checking required tools...
+[OK] Command 'ifconfig' found: /usr/sbin/ifconfig
+[OK] Command 'iptables' found: /usr/sbin/iptables
+[OK] Command 'ip' found: /usr/sbin/ip
+[OK] Command 'iw' found: /usr/sbin/iw
+[OK] Command 'hostapd' found: /usr/sbin/hostapd
+[OK] Command 'iwlist' found: /usr/sbin/iwlist
+[OK] Existing installation detected, skipping license verification.
+[INFO] Previous installation found at /opt/wifipumpkin3-pro.
+[OK] Created installation directory at /opt/wifipumpkin3-pro.
+[OK] Copied configs/
+[OK] Copied ui/
+[OK] Copied binary.
+[OK] License already present in /opt/wifipumpkin3-pro, skipping copy.
+[OK] Created symlink at /usr/local/bin/wifipumpkin3-pro.
+Installation complete!
+You can now run: wifipumpkin3-pro
+```
+
+#### 5️⃣ Activate and Run the Application
+After completing the installation, launch **wifipumpkin3-pro** and activate your license with:
+
+```bash
+sudo wifipumpkin3-pro -activate-license
+sudo wifipumpkin3-pro
+```
+![wifipumpkin3-pro running](/images/pro/installation/wifipumpkin3-pro-kalinux2015-2.png)
+
+<Note>
+  **Need help?** See our [full documentation](https://docs.wifipumpkin3.com) or join our [community](https://discord.gg/jywYskR).
+</Note>

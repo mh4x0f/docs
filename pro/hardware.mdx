@@ -1,0 +1,51 @@
+---
+title: "Hardware"
+description: "About wireless adapter and your kernel driver must support AP mode."
+icon: "microchip"
+---
+
+### Recommended Wireless Adapters
+
+Below is a list of USB Wi-Fi adapters that work well with **Kali Linux**, supporting both **AP mode** and **Monitor mode**.  
+These models are widely tested in penetration testing environments.
+
+| Model | Chipset | Speed | Notes |
+|-------|---------|-------|-------|
+| **Alfa AWUS036NHA** | Atheros AR9271 | 150 Mbps | Excellent AP & Monitor support, very stable |
+| **Alfa AWUS036NH** | Ralink RT3070 | 150 Mbps | Good range, works out-of-the-box on Kali |
+| **Alfa AWUS036ACM** | MediaTek MT7612U | 867 Mbps | Dual-band, stable driver support |
+| **TP-Link TL-WN722N** *(v1 only)* | Atheros AR9271 | 150 Mbps | Affordable, strong community support |
+| **Panda Wireless PAU06** | Ralink RT5372 | 300 Mbps | Reliable and compact |
+| **Alfa AWUS036ACH** | Realtek RTL8812AU | 867 Mbps | Dual-band, requires driver installation |
+| **Edimax EW-7811UAC** | Realtek RTL8812AU | 867 Mbps | Compact dual-band adapter |
+<Note>
+💡 **Note:**  
+The **Atheros AR9271** (e.g., Alfa AWUS036NHA, TP-Link TL-WN722N v1) is known for its excellent performance and compatibility.  
+Avoid newer TL-WN722N versions (v2/v3) — they do **not** support monitor mode properly.  
+For **dual-band** support (2.4GHz & 5GHz), prefer chipsets like **MT7612U** or **RTL8812AU**.
+</Note>
+### About wireless adapters
+Your wireless adapter **and** its kernel driver must support **AP mode**.  
+To check this, run the following shell command:
+``` sh
+ iw list
+```
+If there is 'AP' in the list of "Supported interface modes", your card has support for the desired mode.
+
+### Another method:
+Find the kernel driver module in use for your Wi-Fi card:
+
+``` sh
+ lspci -k | grep -A 3 -i network
+```
+Example output may show a module like ath9k.
+next, use the below command to find out your wifi capabilities (replace ath9k by your kernel driver):
+``` sh
+modinfo ath9k | grep depend
+```
+If the output includes "mac80211", it indicates that your Wi-Fi card supports AP mode.
+
+ The adapter needs to have drivers for GNU/Linux.
+* another website list devices supported [here](http://elinux.org/RPi_USB_Wi-Fi_Adapters)
+* check kernel drive [wireless.wiki](https://wireless.wiki.kernel.org/en/users/drivers)
+* [alfa.docs](https://docs.alfa.com.tw/Support/Linux/AR9271/)
