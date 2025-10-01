@@ -56,6 +56,16 @@ Network interface to provide internet connection, if empty the default interface
 each command can either be executed singularly, or concatenated by the ; in string.
 
 ```bash
+-pulp filename
+```
+Load and run commands automatically from a .pulp script file.
+
+```list-pulp
+-v
+```
+List all available .pulp scripts with description.
+
+```bash
 -autostart string
 ```
 Comma separated list of modules to auto start.
@@ -147,3 +157,7 @@ all wireless mode available
 > `proxies`
 
 show all proxies available and their status.
+
+> `reload`
+
+reload active proxy or a specific proxy configuration dynamically.

@@ -1,0 +1,38 @@
+---
+title: 'Introduction'
+description: 'Overview of the Phishcloud Proxy'
+icon: "star"
+---
+
+The **Phishcloud Proxy** is a modular component designed to manage advanced **captive portal phishing scenarios**.  
+It allows attackers and red team operators to deploy phishing-style portals behind a rogue Access Point (AP).  
+When victims connect, they are transparently redirected to a **cloud-hosted phishing page over HTTPS**, leveraging external proxying tools such as **Evilginx3** or similar frameworks.  
+
+<Card title="Phishcloud" img="/images/pro/phishcloud/phishcloud.png">
+    Phishcloud Web UI Interface
+</Card>
+
+With **Phishcloud**, administrators and operators can:
+
+- Seamlessly **intercept and redirect traffic** from Wi-Fi clients to controlled portals.  
+- **Host phishing portals over HTTPS** without SSL certificate issues by using cloud infrastructure.  
+- Integrate with external reverse-proxy phishing frameworks (e.g., **Evilginx3, Modlishka**) for advanced MFA and token harvesting.    
+
+---
+
+## Key Features
+
+- **Captive Portal Injection** – Forces Wi-Fi clients to the phishing page before granting internet access.  
+- **Cloud Integration** – HTTPS-hosted phishing portals without self-signed certificate warnings.  
+- **Proxy Support** – Works alongside Evilginx3 or other man-in-the-middle proxy frameworks.  
+
+---
+
+## Use Cases
+
+The **Phishcloud Proxy** is commonly used in:  
+
+- **Red Team Operations** – Simulating real-world wireless phishing attacks during engagements.  
+- **Penetration Testing** – Evaluating the resilience of organizations against captive portal phishing.  
+- **Security Awareness Training** – Demonstrating realistic phishing scenarios to educate employees.  
+- **Credential & MFA Bypass Assessments** – Testing how well security teams detect and respond to session hijacking or MFA token theft.  

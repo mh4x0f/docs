@@ -1,0 +1,52 @@
+---
+title: "http.server"
+description: "Lightweight HTTP server module for serving files or handling requests."
+icon: "globe"
+---
+
+# HTTP server (`http.server`)
+
+
+The **HTTP server** enables lightweight web serving files or handling requests.  
+
+---
+
+## Available Commands
+
+### `http.server`
+
+- **Description**: Start or stop the HTTP server. Usage: http.server on|off
+
+```bash
+  wp3-pro > http.server on
+  wp3-pro > http.server off
+```
+
+### Parameters
+
+### `http.server.address`
+
+- **Description**:IP address where the HTTP server will bind.
+Default: 127.0.0.1
+
+```bash
+  wp3-pro >set http.server.address 127.0.0.1
+```
+
+### `http.server.path`
+
+- **Description**: Path to the content directory served by the HTTP server.
+Default: (empty)
+
+```bash
+  wp3-pro >set http.server.path /var/www
+```
+
+### `http.server.port`
+
+- **Description**: Port number where the HTTP server will bind.
+Default: 80
+
+```bash
+  wp3-pro >set http.server.port 8080
+```

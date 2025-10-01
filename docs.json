@@ -74,7 +74,8 @@
               "pro/modules/webui",
               "pro/modules/apirest",
               "pro/modules/eventstream",
-              "pro/modules/update"
+              "pro/modules/update",
+              "pro/modules/httpserver"
             ]
           },
           {
@@ -91,6 +92,12 @@
               "pro/flowtamper/introduction",
               "pro/flowtamper/structure",
               "pro/flowtamper/templates"
+            ]
+          },
+          {
+            "group": "Phishcloud",
+            "pages": [
+              "pro/phishcloud/introduction"
             ]
           }
         ]
