@@ -1,0 +1,80 @@
+---
+title: "creds.monitor"
+description: "Real-time monitoring and listing of credentials collected during sessions"
+icon: "key"
+---
+
+# Creds Monitor (`creds.monitor`)
+
+
+<Card title="creds.monitor" img="/images/pro/credsmonitor/credsmonitor.png">
+    creds.monitor Web UI Interface
+</Card>
+
+The **Creds Monitor** real-time monitoring and listing of credentials collected during sessions.  
+
+---
+
+## Available Commands
+
+### `creds.monitor`
+
+- **Description**: Start or stop the credential monitoring feature. Usage: creds.monitor on|off
+
+```bash
+  wp3-pro > creds.monitor on
+  wp3-pro > creds.monitor off
+```
+
+
+### `creds.monitor.log`
+
+- **Description**: Start or stop logs write on creds.monitor. Usage: creds.monitor.log on|off
+
+```bash
+  wp3-pro > creds.monitor.log on
+  wp3-pro > creds.monitor.log off
+```
+
+### `creds.monitor.show`
+
+- **Description**: Show the list of captured credentials. Usage creds.monitor.show
+
+```bash
+  wp3-pro > creds.monitor.show
+```
+
+### `creds.monitor.include`
+
+- **Description**: Include event restore monitoring credentials. Usage creds.monitor.include FILTER
+
+```bash
+  wp3-pro > creds.monitor.include flowtamper
+```
+
+### `creds.monitor.ignore`
+
+- **Description**: Ignore event restore monitoring credentials. Usage creds.monitor.ignore FILTER
+
+```bash
+  wp3-pro > creds.monitor.ignore flowtamper
+```
+
+### Parameters
+
+### `creds.timestamps`
+
+- **Description**: Show timestamps
+Default: 127.0.0.1
+
+```bash
+  wp3-pro >set creds.timestamps true
+```
+
+### `creds.monitor.logfile`
+
+- **Description**: events creds will be written to this file
+
+```bash
+  wp3-pro >set creds.monitor.logfile test.log
+```
