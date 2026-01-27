@@ -1,0 +1,109 @@
+---
+title: "wifi.connect"
+description: "Wi-Fi scanning, credential management and automatic connection to wireless networks"
+icon: "wifi"
+---
+
+# Wi-Fi Connect (`wifi.connect`)
+
+<Card title="wifi.connect" img="/images/pro/modules/wifi.connect.png">
+    Wireless network manager for WiFiPumpkin3 Pro
+</Card>
+
+The **Wi-Fi Connect** module provides wireless network scanning, credential handling, and automatic connection to available access points.  
+It is designed to simplify network management, especially in mobile, embedded, or headless environments.
+
+---
+
+## Available Commands
+
+### `wifi.connect`
+
+- **Description**: Enable or disable the Wi-Fi connection manager.
+- **Usage**: `wifi.connect on|off`
+
+```bash
+wp3-pro > wifi.connect on
+wp3-pro > wifi.connect off
+```
+
+### `wifi.connect.scan`
+
+- **Description**: Scan for available Wi-Fi access points.
+- **Usage**: `wifi.connect.scan`
+
+```bash
+wp3-pro > wifi.connect.scan
+```
+
+### `wifi.connect connect`
+
+- **Description**: Connect to a selected wireless network using stored credentials.
+- **Usage**: `wifi.connect connect <bssid> <password>`
+
+```bash
+wp3-pro > wifi.connect connect 00:1A:2B:3C:4D:5E testpassword
+```
+
+### `wifi.connect disconnect`
+
+- **Description**: Disconnect from the currently connected wireless network.
+- **Usage**: `wifi.connect disconnect`
+
+```bash
+wp3-pro > wifi.connect disconnect
+```
+
+
+### `wifi.connect status`
+
+- **Description**: Show current Wi-Fi connection status.
+- **Usage**: `wifi.connect status`
+
+```bash
+wp3-pro > wifi.connect status
+```
+
+### `wifi.connect.creds`
+
+- **Description**: Manage stored Wi-Fi credentials.
+- **Usage**: `wifi.connect.creds <add|remove|list>`
+
+```bash
+wp3-pro > wifi.connect.creds add 00:1A:2B:3C:4D:5E testpassword
+wp3-pro > wifi.connect.creds add 00:1A:2B:3C:4D:5E
+```
+
+### Parameters
+
+### `wifi.connect.autoconnect`
+
+- **Description**: Automatically connect to the best available access point based on defined filters.
+Default: false
+```bash
+wp3-pro > set wifi.connect.autoconnect true
+```
+
+### `wifi.connect.interface`
+
+- **Description**: Wireless interface used by the Wi-Fi Connect module.
+Default: wlp0s20f3
+```bash
+wp3-pro > set wifi.connect.interface wlan0
+```
+
+### `wifi.connect.min_signal_dbm`
+
+- **Description**: Minimum signal strength (RSSI in dBm) required for a network to be considered during autoconnect.
+Default: -80
+```bash
+wp3-pro > set wifi.connect.min_signal_dbm -70
+```
+
+### `wifi.connect.timeout`
+
+- **Description**: Maximum time (in seconds) to wait when attempting to connect to a wireless network.
+Default: 15
+```bash
+wp3-pro > set wifi.connect.timeout 15
+```

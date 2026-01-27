@@ -1,0 +1,85 @@
+---
+title: "epaper.ui"
+description: "ePaper UI interface for Raspberry Pi Zero displays"
+icon: "tablet"
+---
+
+# ePaper UI (`epaper.ui`)
+
+<Card title="epaper.ui" img="/images/pro/modules/epaper-ui.png">
+    ePaper UI Interface for Raspberry Pi Zero
+</Card>
+
+The **ePaper UI** module provides a lightweight graphical interface displayed on ePaper screens connected to a Raspberry Pi Zero.  
+It is designed to show system status, network information, and power/battery metrics with low power consumption.
+
+---
+
+## Available Commands
+
+### `epaper.ui`
+
+- **Description**: Enable or disable the ePaper UI module.  
+- **Usage**: `epaper.ui on|off`
+
+```bash
+wp3-pro > epaper.ui on
+wp3-pro > epaper.ui off
+```
+
+### Parameters
+
+### `epaper.ui.display`
+
+- **Description**: Specifies the ePaper display model connected to the device.
+Supported values:
+ - waveshare2in13v4
+
+Default: waveshare2in13v4
+```bash
+wp3-pro > set epaper.ui.display waveshare2in13v4
+```
+
+### `epaper.ui.power.enable`
+
+- **Description**: Enables or disables battery monitoring on the ePaper UI.
+When disabled, battery status will not be displayed or updated.
+Default: true
+```bash
+wp3-pro > set epaper.ui.power.enable true
+wp3-pro > set epaper.ui.power.enable false
+```
+
+### `epaper.ui.power.module`
+
+- **Description**: Specifies the power management module used for battery monitoring.
+Supported values:
+- UPS_Lite_V1.3_CW2015
+Default: UPS_Lite_V1.3_CW2015
+```bash
+wp3-pro > set epaper.ui.power.module UPS_Lite_V1.3_CW2015
+```
+
+### `epaper.ui.refresh_rate`
+
+- **Description**: Defines the screen refresh rate in seconds.
+Determines how often the ePaper UI updates its displayed information
+Default:5
+```bash
+wp3-pro > set epaper.ui.refresh_rate 5
+```
+
+### `epaper.ui.rotation`
+
+- **Description**: Defines the screen rotation angle in degrees.
+Controls the orientation of the ePaper display.
+Default:90
+```bash
+wp3-pro > set epaper.ui.rotation 90
+```
+
+### Notes
+
+This module is optimized for Raspberry Pi Zero / Zero 2 W.
+Lower refresh rates reduce power consumption and extend ePaper lifespan.
+Battery monitoring requires a supported power module and epaper.ui.power.enable set to true.

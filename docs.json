@@ -76,7 +76,10 @@
               "pro/modules/eventstream",
               "pro/modules/update",
               "pro/modules/httpserver",
-              "pro/modules/credsmonitor"
+              "pro/modules/credsmonitor",
+              "pro/modules/epaperui",
+              "pro/modules/sysautorun",
+              "pro/modules/wificonnect"
             ]
           },
           {

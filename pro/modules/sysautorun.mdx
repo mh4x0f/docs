@@ -1,0 +1,62 @@
+---
+title: "sys.autorun"
+description: "Automatically executes predefined commands or scripts during system startup"
+icon: "flag"
+---
+
+# System Autorun (`sys.autorun`)
+
+<Card title="sys.autorun" img="/images/pro/modules/sysautorun.png">
+    Automatic startup execution for WiFiPumpkin3 Pro
+</Card>
+
+The **System Autorun** module allows WiFiPumpkin3 Pro to automatically execute predefined commands or scripts during system startup.  
+It is commonly used to restore environments, enable modules, or run `.pulp` scripts without manual interaction.
+
+---
+
+## Available Commands
+
+### `sys.autorun`
+
+- **Description**: Enable or disable the autorun system.
+- **Usage**: `sys.autorun on|off`
+
+```bash
+wp3-pro > sys.autorun on
+wp3-pro > sys.autorun off
+```
+
+### Parameters
+
+### `sys.autorun.pulp_path`
+
+- **Description**: Path to a .pulp script file that will be executed automatically during system startup.
+Default: (empty)
+```bash
+wp3-pro > set sys.autorun.pulp_path /opt/wp3/scripts/startup.pulp
+```
+
+### `sys.autorun.xpulp_commands`
+
+- **Description**: Inline commands to be executed automatically on startup.
+Commands must be separated by semicolons (;).
+Default: (empty)
+```bash
+wp3-pro > set sys.autorun.xpulp_commands "ap; help;start"
+```
+
+### `sys.autorun.service_name`
+
+- **Description**: Name of the systemd service responsible for starting WiFiPumpkin3 Pro automatically during system boot.
+Default: wifipumpkin3-autorun.service
+```bash
+wp3-pro > set sys.autorun.service_name wifipumpkin3-autorun.service
+```
+
+### Notes
+
+The autorun system relies on systemd and requires proper service installation.
+You may use either pulp_path or xpulp_commands, depending on your workflow.
+Inline commands are executed sequentially in the order they are defined.
+This module is ideal for unattended deployments, headless systems, and embedded devices.
