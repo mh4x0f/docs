@@ -18,19 +18,21 @@ Modules complement the main attack or monitoring functionality, allowing users t
 
 ### Available Modules
 
-| Module         | Description |
-|----------------|-------------|
-| `api.rest`     | The REST endpoint layer for WP3 Pro. |
-| `event.stream` | Live event stream viewer. |
-| `net.sniff`    | Capture and inspect network packets silently in the background. |
-| `update`       | Handles update checks and related operations. |
-| `web.ui`       | Web UI for real-time interaction with WP3 Pro. |
-| `wifi.recon`   | Monitor wireless networks and perform 802.11 deauthentication attacks. |
-| `http.server`   | Lightweight HTTP server module for serving files or handling requests. |
-| `creds.monitor`   | Real-time monitoring and listing of credentials collected during sessions. |
-| `epaper.ui`   | The epaper ui interface for raspberry pi zero. |
-| `sys.autorun`   | Automatically executes predefined commands or scripts during system startup.|
-| `wifi.connect`   | Provides Wi-Fi scanning, password handling and automatic connection to available wireless networks. |
+| Module | Description | Docs | Image |
+|--------|-------------|------|-------|
+| `api.rest` | The REST endpoint layer for WP3 Pro. | [Open](/pro/modules/apirest) | - |
+| `event.stream` | Live event stream viewer. | [Open](/pro/modules/eventstream) | ![event.stream](/images/pro/modules/eventstream.png) |
+| `net.sniff` | Capture and inspect network packets silently in the background. | [Open](/pro/modules/netsniff) | ![net.sniff](/images/pro/modules/net.sniff.png) |
+| `update` | Handles update checks and related operations. | [Open](/pro/modules/update) | - |
+| `web.ui` | Web UI for real-time interaction with WP3 Pro. | [Open](/pro/modules/webui) | ![web.ui](/images/pro/modules/web.ui.png) |
+| `web.remote` | Reverse SSH tunnel to expose local Web UI and API through a VPS. | [Open](/pro/modules/webremote) | ![web.remote](/images/pro/modules/web-remote.png) |
+| `wifi.recon` | Monitor wireless networks and perform 802.11 deauthentication attacks. | [Open](/pro/modules/wifirecon) | ![wifi.recon](/images/pro/modules/wifi.recon.png) |
+| `wifi.spam` | 802.11 Beacon frame generator for wireless simulation and stress testing. | [Open](/pro/modules/wifispam) | ![wifi.spam](/images/pro/modules/wifi-spam.png) |
+| `http.server` | Lightweight HTTP server module for serving files or handling requests. | [Open](/pro/modules/httpserver) | - |
+| `creds.monitor` | Real-time monitoring and listing of credentials collected during sessions. | [Open](/pro/modules/credsmonitor) | ![creds.monitor](/images/pro/modules/credsmonitor/credsmonitor.png) |
+| `epaper.ui` | The epaper UI interface for Raspberry Pi Zero. | [Open](/pro/modules/epaperui) | ![epaper.ui](/images/pro/modules/epaper-ui.png) |
+| `sys.autorun` | Automatically executes predefined commands or scripts during system startup. | [Open](/pro/modules/sysautorun) | ![sys.autorun](/images/pro/modules/sysautorun.png) |
+| `wifi.connect` | Provides Wi-Fi scanning, password handling and automatic connection to available wireless networks. | [Open](/pro/modules/wificonnect) | ![wifi.connect](/images/pro/modules/wifi.connect.png) |
 
 ---
 
@@ -41,4 +43,3 @@ Modules complement the main attack or monitoring functionality, allowing users t
 | `wireguard.vpn`  | Integrate a WireGuard VPN tunnel directly into WP3 Pro. |
 | `lan.recon`      | Scan and discover devices and services within a local area network. |
 | `wp3.brute`      | Perform brute-force attacks on WPA3-protected networks. |
-

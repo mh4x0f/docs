@@ -79,7 +79,9 @@
               "pro/modules/credsmonitor",
               "pro/modules/epaperui",
               "pro/modules/sysautorun",
-              "pro/modules/wificonnect"
+              "pro/modules/wificonnect",
+              "pro/modules/webremote",
+              "pro/modules/wifispam"
             ]
           },
           {

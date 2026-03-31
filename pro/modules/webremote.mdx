@@ -1,0 +1,73 @@
+---
+title: "web.remote"
+description: "Reverse SSH tunnel to expose local Web UI and API through a VPS."
+icon: "network"
+---
+
+# Web Remote (`web.remote`)
+
+<Card title="web.remote" img="/images/pro/modules/web-remote.png">
+    Reverse SSH tunnel to expose local Web UI and API through a VPS.
+</Card>
+
+The **`web.remote`** module creates a reverse SSH tunnel from your WP3 Pro instance to a VPS.  
+This allows you to securely expose the local Web UI and REST API through remote ports.
+
+---
+
+## Available Commands
+
+### `web.remote`
+
+- **Description**: Start or stop remote web tunnel.
+- **Usage**: `web.remote on|off`
+
+```bash
+wp3-pro > web.remote on
+wp3-pro > web.remote off
+```
+
+### Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `web.remote.api_local` | Local API address. | `127.0.0.1:8083` |
+| `web.remote.api_remote` | Remote API bind address on VPS. | `0.0.0.0:9003` |
+| `web.remote.host` | VPS SSH host. | (empty) |
+| `web.remote.key` | Path to private key (optional). | (empty) |
+| `web.remote.password` | SSH password (optional if key is used). | (empty) |
+| `web.remote.port` | VPS SSH port. | `22` |
+| `web.remote.user` | SSH username. | (empty) |
+| `web.remote.web_local` | Local Web UI address. | `127.0.0.1:80` |
+| `web.remote.web_remote` | Remote Web UI bind address on VPS. | `0.0.0.0:9000` |
+
+### Examples
+
+Set VPS credentials and start tunnel:
+
+```bash
+wp3-pro > set web.remote.host vps.example.com
+wp3-pro > set web.remote.user root
+wp3-pro > set web.remote.key /home/user/.ssh/id_rsa
+wp3-pro > web.remote on
+```
+
+Expose Web UI and API on custom remote ports:
+
+```bash
+wp3-pro > set web.remote.web_remote 0.0.0.0:9443
+wp3-pro > set web.remote.api_remote 0.0.0.0:9444
+wp3-pro > web.remote on
+```
+
+### Summary
+
+The `web.remote` module provides:
+
+- Reverse SSH tunneling for remote access.
+- Controlled exposure of local Web UI and API endpoints.
+- Flexible authentication with SSH key or password.
+
+<Warning>
+Expose only required ports and prefer SSH keys over passwords for better security.
+</Warning>

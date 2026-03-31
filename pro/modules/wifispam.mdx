@@ -1,0 +1,87 @@
+---
+title: "wifi.spam"
+description: "802.11 Beacon frame generator for wireless simulation and stress testing."
+icon: "radio"
+---
+
+# WiFi Spam (`wifi.spam`)
+
+<Card title="wifi.spam" img="/images/pro/modules/wifi-spam.png">
+    802.11 Beacon frame generator for wireless simulation and stress testing.
+</Card>
+
+The **`wifi.spam`** module generates large amounts of 802.11 beacon frames.  
+It is useful for wireless simulation, stress testing, and controlled lab scenarios.
+
+---
+
+## Available Commands
+
+### `wifi.spam`
+
+- **Description**: Start or stop Beacon Flood mode.
+- **Usage**: `wifi.spam on|off`
+
+```bash
+wp3-pro > wifi.spam on
+wp3-pro > wifi.spam off
+```
+
+### Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `wifi.spam.adhoc` | Use IBSS (adhoc) instead of ESS. | `false` |
+| `wifi.spam.channel` | Channel to transmit beacons. | `1` |
+| `wifi.spam.channels` | Comma-separated channel list for hopping. | `1,6,11` |
+| `wifi.spam.gmode` | Use 1-54 Mbps rates (802.11g). | `true` |
+| `wifi.spam.hop` | Enable channel hopping. | `false` |
+| `wifi.spam.hop_delay` | Channel hop delay in milliseconds. | `500` |
+| `wifi.spam.interface` | Interface used for beacon flood (monitor mode required). | (empty) |
+| `wifi.spam.oui_mode` | OUI mode: `0=random`, `1=realistic`, `2=fixed`. | `0` |
+| `wifi.spam.oui_vendor` | Vendor for realistic OUI (`cisco,tp-link,ubiquiti,mikrotik`). | `cisco` |
+| `wifi.spam.random_mac` | Use random MAC per beacon. | `true` |
+| `wifi.spam.rate` | Beacons per second (similar to `mdk3 -s`). | `1000` |
+| `wifi.spam.security` | Security mode: `0=open`, `1=wep`, `2=tkip`, `3=aes`. | `0` |
+| `wifi.spam.tx_power` | Fake TX power (dBm). | `20` |
+| `wifi.spam.wordlist` | Path to SSID wordlist file (one SSID per line). | (empty) |
+
+### Examples
+
+Run beacon flood on interface `wlan0mon` at channel 6:
+
+```bash
+wp3-pro > set wifi.spam.interface wlan0mon
+wp3-pro > set wifi.spam.channel 6
+wp3-pro > wifi.spam on
+```
+
+Enable channel hopping and custom OUI behavior:
+
+```bash
+wp3-pro > set wifi.spam.hop true
+wp3-pro > set wifi.spam.channels 1,6,11
+wp3-pro > set wifi.spam.oui_mode 1
+wp3-pro > set wifi.spam.oui_vendor mikrotik
+wp3-pro > wifi.spam on
+```
+
+Use custom SSID wordlist:
+
+```bash
+wp3-pro > set wifi.spam.wordlist /tmp/ssid-list.txt
+wp3-pro > set wifi.spam.rate 1500
+wp3-pro > wifi.spam on
+```
+
+### Summary
+
+The `wifi.spam` module provides:
+
+- High-rate 802.11 beacon generation.
+- Channel hopping and transmission tuning.
+- Configurable SSID, OUI, security mode, and MAC randomization options.
+
+<Warning>
+Use this module only in authorized environments. Wireless flooding may disrupt nearby networks.
+</Warning>
