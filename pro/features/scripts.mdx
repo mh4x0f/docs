@@ -1,0 +1,30 @@
+---
+title: 'Scripts'
+description: 'Run, validate, and compose .pulp automation with exec and session vars.'
+icon: 'file-code'
+---
+
+
+WP3 Pro scripting workflows combine `scripts.runner`, `exec.runtime`, and session variables (`var`) for reusable automation pipelines.
+
+### Core commands
+
+```bash
+wp3-pro > scripts.runner list
+wp3-pro > scripts.runner validate <script>
+wp3-pro > scripts.runner run <script>
+wp3-pro > exec allowed
+wp3-pro > var list
+```
+
+### Recommended flow
+
+1. Validate script with `scripts.runner validate`.
+2. Confirm runtime allowlist with `exec allowed`.
+3. Capture dynamic values with `exec capture`.
+4. Reuse values using `${variable.name}`.
+5. Inspect runtime values with `var list`.
+
+<Card title="Related Module" icon="book" href="/pro/modules/scriptsrunner" arrow="true" cta="Open module docs">
+  Full command reference and examples for `scripts.runner`.
+</Card>

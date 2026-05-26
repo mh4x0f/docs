@@ -55,7 +55,9 @@
             "pages": [
               "pro/introduction",
               "pro/installation",
-              "pro/hardware"
+              "pro/hardware",
+              "pro/features/findmydevices",
+              "pro/features/scripts"
             ]
           },
           {
@@ -69,12 +71,20 @@
           {
             "group": "Modules",
             "pages": [
+              "pro/modules/alertui",
+              "pro/modules/batterymonitor",
+              "pro/modules/btpan",
+              "pro/modules/execruntime",
               "pro/modules/netsniff",
               "pro/modules/wifirecon",
               "pro/modules/webui",
               "pro/modules/apirest",
               "pro/modules/eventstream",
+              "pro/modules/lanrecon",
+              "pro/modules/scriptsrunner",
+              "pro/modules/sessionmanager",
               "pro/modules/update",
+              "pro/modules/wardriving",
               "pro/modules/httpserver",
               "pro/modules/credsmonitor",
               "pro/modules/epaperui",

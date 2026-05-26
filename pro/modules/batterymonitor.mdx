@@ -1,0 +1,77 @@
+---
+title: "battery.monitor"
+description: "Overview and usage of the WP3 Pro Battery Monitor module."
+icon: "battery-half"
+---
+
+# Battery Monitor (`battery.monitor`)
+
+<Card title="battery.monitor" img="/images/pro/modules/batterymonitor.png">
+    battery.monitor Web UI Interface
+</Card>
+
+
+The **`battery.monitor`** module provides runtime battery level monitoring for **WP3 Pro**.
+It allows enabling or disabling battery tracking and configuring how battery data is collected.
+
+---
+
+## Available Commands
+
+### `battery.monitor`
+
+- **Description**: Control the battery monitor module state.
+
+```bash
+wp3-pro > battery.monitor on
+wp3-pro > battery.monitor off
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `battery.monitor.debug` | Enable verbose debug logs for `battery.monitor` and `wp3powerd` stderr. | `false` |
+| `battery.monitor.enable` | Enable or disable battery monitoring updates. | `true` |
+| `battery.monitor.power_module` | Power module used for battery monitoring (for example: `UPS_Lite_V1.3_CW2015`, `PiSugar2_BQ27441`). | `UPS_Lite_V1.3_CW2015` |
+| `battery.monitor.refresh_rate` | Battery polling interval in seconds. | `180` |
+
+---
+
+## Examples
+
+Enable battery monitor:
+
+```bash
+wp3-pro > battery.monitor on
+```
+
+Disable battery monitor:
+
+```bash
+wp3-pro > battery.monitor off
+```
+
+Enable debug logs:
+
+```bash
+wp3-pro > set battery.monitor.debug true
+```
+
+Switch the battery power module:
+
+```bash
+wp3-pro > set battery.monitor.power_module PiSugar2_BQ27441
+```
+
+Set a faster refresh rate:
+
+```bash
+wp3-pro > set battery.monitor.refresh_rate 60
+```
+
+<Note>
+Use lower `battery.monitor.refresh_rate` values for more frequent updates, but keep in mind this may increase resource usage.
+</Note>

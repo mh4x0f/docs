@@ -1,0 +1,136 @@
+---
+title: "alert.ui"
+description: "Overview and usage of the WP3 Pro Alert UI module."
+icon: "bell"
+---
+
+# Alert UI (`alert.ui`)
+
+<Card title="alert.ui" img="/images/pro/modules/alertui.png">
+    alert.ui Web UI Interface
+</Card>
+
+The **`alert.ui`** module provides **event-based real-time alerting** with modular rules.
+It helps highlight important events during operation, while reducing noise through rule filters and cooldown settings.
+
+---
+
+## Available Commands
+
+### `alert.ui`
+
+- **Description**: Enable or disable the Alert UI module.
+
+```bash
+wp3-pro > alert.ui on
+wp3-pro > alert.ui off
+```
+
+### `alert.ui.show`
+
+- **Description**: Show the latest collected alerts.
+
+```bash
+wp3-pro > alert.ui.show
+wp3-pro > alert.ui.show 20
+```
+
+### `alert.ui.clear`
+
+- **Description**: Clear all collected alerts from memory.
+
+```bash
+wp3-pro > alert.ui.clear
+```
+
+### `alert.ui.rule.list`
+
+- **Description**: List configured rules. Optionally filter with a query.
+
+```bash
+wp3-pro > alert.ui.rule.list
+wp3-pro > alert.ui.rule.list wifi.recon
+```
+
+### `alert.ui.rule.add`
+
+- **Description**: Add a new alert rule (exact tag or prefix wildcard).
+
+```bash
+wp3-pro > alert.ui.rule.add creds.monitor
+wp3-pro > alert.ui.rule.add wifi.recon.*
+```
+
+### `alert.ui.rule.remove`
+
+- **Description**: Remove an existing rule.
+
+```bash
+wp3-pro > alert.ui.rule.remove wifi.recon.new
+```
+
+### `alert.ui.rule.enable`
+
+- **Description**: Enable a disabled rule.
+
+```bash
+wp3-pro > alert.ui.rule.enable wifi.recon.*
+```
+
+### `alert.ui.rule.disable`
+
+- **Description**: Disable a rule without deleting it.
+
+```bash
+wp3-pro > alert.ui.rule.disable wifi.recon.*
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `alert.ui.cooldown_seconds` | Minimum interval in seconds between alerts for the same event tag. | `20` |
+| `alert.ui.max_entries` | Maximum number of alert entries kept in memory. | `300` |
+| `alert.ui.on_trigger` | Optional command executed when an alert triggers. Supports token: `{tag}`. | `(empty)` |
+| `alert.ui.rules` | Comma-separated rules. Prefix with `!` to disable a rule (example: `!wifi.recon.*`). | `creds.monitor,wifi.recon.security.handshake,wifi.recon.new,wifi.recon.lost,lan.recon.host.new` |
+
+---
+
+## Examples
+
+Set a longer cooldown to avoid repeated alerts:
+
+```bash
+wp3-pro > set alert.ui.cooldown_seconds 60
+```
+
+Limit retained alert history:
+
+```bash
+wp3-pro > set alert.ui.max_entries 100
+```
+
+Run a command whenever an alert triggers:
+
+```bash
+wp3-pro > set alert.ui.on_trigger "log.warn {tag}"
+```
+
+Disable one noisy rule without removing it:
+
+```bash
+wp3-pro > alert.ui.rule.disable wifi.recon.lost
+```
+
+Use inline disabled rules through parameter configuration:
+
+```bash
+wp3-pro > set alert.ui.rules creds.monitor,!wifi.recon.lost,wifi.recon.new
+```
+
+<Note>
+Use `alert.ui.rule.disable` when you may want to re-enable the same rule later.
+Use `alert.ui.rule.remove` when the rule should be deleted from the configuration.
+</Note>

@@ -1,0 +1,114 @@
+---
+title: "lan.recon"
+description: "Overview and usage of the WP3 Pro LAN Recon module."
+icon: "network-wired"
+---
+
+# LAN Recon (`lan.recon`)
+
+<Card title="lan.recon" img="/images/pro/modules/lanrecon.png">
+    lan.recon Web UI Interface
+</Card>
+
+
+The **`lan.recon`** module discovers LAN devices (**IP/MAC/vendor**), estimates upload/download rates, runs TCP port scans, and profiles hosts in real time.
+It is useful for visibility and fast mapping of local network assets during operations.
+
+---
+
+## Available Commands
+
+### `lan.recon`
+
+- **Description**: Start or stop LAN reconnaissance.
+
+```bash
+wp3-pro > lan.recon on
+wp3-pro > lan.recon off
+```
+
+### `lan.recon.show`
+
+- **Description**: Show discovered LAN hosts with traffic rates and profiling data.
+
+```bash
+wp3-pro > lan.recon.show
+```
+
+### `lan.recon.scan`
+
+- **Description**: Trigger an immediate LAN refresh using ARP/neighbor cache.
+
+```bash
+wp3-pro > lan.recon.scan
+```
+
+### `lan.recon.ports`
+
+- **Description**: Scan TCP ports on a target host or on all discovered hosts.
+
+```bash
+wp3-pro > lan.recon.ports 192.168.1.50
+wp3-pro > lan.recon.ports 192.168.1.50 22,80,443,8080
+wp3-pro > lan.recon.ports all
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `lan.recon.active_sweep` | Actively sweep local IPv4 subnet to find online hosts before enrichment. | `true` |
+| `lan.recon.active_sweep_max_hosts` | Maximum hosts allowed for active sweep (safety guard for large networks). | `4096` |
+| `lan.recon.interface` | Network interface used for ARP discovery and passive traffic accounting. | `(empty)` |
+| `lan.recon.ping_check` | Validate host activity with native ICMP ping before keeping it online. | `true` |
+| `lan.recon.ping_timeout_ms` | ICMP ping timeout in milliseconds. | `300` |
+| `lan.recon.ping_workers` | Maximum concurrent ping workers for activity checks. | `24` |
+| `lan.recon.poll_seconds` | Refresh interval (seconds) for ARP table and `ip neigh` neighbor updates. | `8` |
+| `lan.recon.port.autoscan` | Automatically run default TCP port scan when a new host is discovered. | `false` |
+| `lan.recon.port.max_workers` | Maximum concurrent workers for TCP port scan. | `64` |
+| `lan.recon.port.ports` | Default TCP ports used for scans. Supports list/ranges (example: `22,80,443,8000-8100`). | `22,53,80,123,135,137,138,139,443,445,554,631,1883,3306,3389,5353,5555,62078,8080,8443` |
+| `lan.recon.port.timeout_ms` | TCP connect timeout in milliseconds used by port scan. | `350` |
+| `lan.recon.sample_seconds` | Sampling window in seconds for upload/download rate estimation. | `1` |
+
+---
+
+## Examples
+
+Start recon and display discovered devices:
+
+```bash
+wp3-pro > lan.recon on
+wp3-pro > lan.recon.show
+```
+
+Run a manual refresh:
+
+```bash
+wp3-pro > lan.recon.scan
+```
+
+Enable automatic port scans for new hosts:
+
+```bash
+wp3-pro > set lan.recon.port.autoscan true
+```
+
+Customize default ports and timeout:
+
+```bash
+wp3-pro > set lan.recon.port.ports 22,80,443,8080,8443
+wp3-pro > set lan.recon.port.timeout_ms 500
+```
+
+Tune performance for larger LANs:
+
+```bash
+wp3-pro > set lan.recon.ping_workers 48
+wp3-pro > set lan.recon.active_sweep_max_hosts 2048
+```
+
+<Note>
+For large or sensitive networks, start with conservative worker and timeout values to avoid generating excessive scan load.
+</Note>

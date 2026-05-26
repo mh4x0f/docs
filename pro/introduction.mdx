@@ -48,6 +48,43 @@ The dashboard provides a centralized view of all core modules and their status â
 
 ---
 
+### New in `v3.0.0-beta1`
+
+This beta expands WP3 Pro beyond core AP operations with stronger automation, mobile workflows, and secure remote control.
+
+#### Platform and UI Enhancements
+
+- Full mobile support with PWA app experience
+- Interactive Shell UI in dashboard for operational diagnostics
+- `Find My Devices` for local WP3 Pro endpoint discovery
+- `Recent Devices` for fast reconnect workflows
+- Native HTTPS/TLS for `web.ui` and `api.rest` with auto-TLS setup flow
+
+#### Automation and Session Continuity
+
+- Session `var` support in WP3 Pulp automation
+- Safer command runtime with `exec run`, `exec capture`, and `exec allowed`
+- Persistent session lifecycle management with `session.manager`
+- Script catalog and validation pipeline with `scripts.runner`
+
+#### Field and Recon Readiness
+
+- Geolocated Wi-Fi collection with `wardriving`
+- Local network profiling and port scanning with `lan.recon`
+- Runtime battery awareness with `battery.monitor`
+- Alternative control channel support via Bluetooth PAN (`bt.pan`)
+- Faster phishing simulation setup with PhishPortal template download workflows
+
+<Card title="Dashboard and Mobile-Ready Control Surface" img="/images/webui/dashboard.png">
+  Updated operations focus: real-time visibility, remote handling, and field-friendly control.
+</Card>
+
+<Card title="PhishPortal Workflow" img="/images/pro/phishportal/phishportal.png">
+  PhishPortal now fits better into fast campaign preparation with improved template workflows.
+</Card>
+
+---
+
 <Card
   title="Visit the Official Site"
   icon="globe"

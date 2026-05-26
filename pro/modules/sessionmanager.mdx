@@ -1,0 +1,113 @@
+---
+title: "session.manager"
+description: "Overview and usage of the WP3 Pro Session Manager module."
+icon: "folder-open"
+---
+
+# Session Manager (`session.manager`)
+
+<Card title="session.manager" img="/images/pro/modules/sessionmanager.png">
+    session.manager Web UI Interface
+</Card>
+
+
+The **`session.manager`** module lets you create, list, restore, and delete saved sessions for both **CLI** and **UI** workflows in **WP3 Pro**.
+It helps keep operations organized and allows resuming work from previously saved states.
+
+---
+
+## Available Commands
+
+### `session.manager`
+
+- **Description**: Start or stop the session manager helper.
+
+```bash
+wp3-pro > session.manager on
+wp3-pro > session.manager off
+```
+
+### `session.manager.list`
+
+- **Description**: List saved sessions.
+
+```bash
+wp3-pro > session.manager.list
+```
+
+### `session.manager.active`
+
+- **Description**: Show the active session.
+
+```bash
+wp3-pro > session.manager.active
+```
+
+### `session.manager.create`
+
+- **Description**: Create and start a new session.
+
+```bash
+wp3-pro > session.manager.create engagement_alpha
+```
+
+### `session.manager.stop`
+
+- **Description**: Stop active session (or stop by session ID).
+
+```bash
+wp3-pro > session.manager.stop
+wp3-pro > session.manager.stop 3
+```
+
+### `session.manager.restore`
+
+- **Description**: Restore and start a saved session.
+
+```bash
+wp3-pro > session.manager.restore 3
+```
+
+### `session.manager.delete`
+
+- **Description**: Delete a saved session.
+
+```bash
+wp3-pro > session.manager.delete 3
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `session.manager.cleanstart` | Clean live events when creating a new session. | `true` |
+
+---
+
+## Examples
+
+Start session manager and create a new session:
+
+```bash
+wp3-pro > session.manager on
+wp3-pro > session.manager.create test_run_01
+```
+
+List sessions and restore one:
+
+```bash
+wp3-pro > session.manager.list
+wp3-pro > session.manager.restore 2
+```
+
+Disable clean start behavior for new sessions:
+
+```bash
+wp3-pro > set session.manager.cleanstart false
+```
+
+<Note>
+Use clear and consistent session names to simplify later restore and cleanup operations.
+</Note>

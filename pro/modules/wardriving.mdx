@@ -1,0 +1,70 @@
+---
+title: "wardriving"
+description: "Overview and usage of the WP3 Pro Wardriving module."
+icon: "map"
+---
+
+# Wardriving (`wardriving`)
+
+<Card title="wardriving" img="/images/pro/modules/wardriving.png">
+    wardriving Web UI Interface
+</Card>
+
+
+The **`wardriving`** module collects and correlates `wifi.recon` detections with geolocation points in **WP3 Pro**.
+It helps build location-aware wireless discovery datasets during field operations.
+
+---
+
+## Available Commands
+
+### `wardriving`
+
+- **Description**: Start or stop wardriving correlation.
+
+```bash
+wp3-pro > wardriving on
+wp3-pro > wardriving off
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `wardriving.active_snapshot` | Active wardriving snapshot ID. New captures continue saving into this snapshot until changed. | `(empty)` |
+| `wardriving.gps_max_age_seconds` | Maximum GPS sample age in seconds used to correlate Wi-Fi events. | `15` |
+| `wardriving.max_history` | Maximum number of wardriving history snapshots persisted on disk. | `40` |
+
+---
+
+## Examples
+
+Start wardriving collection:
+
+```bash
+wp3-pro > wardriving on
+```
+
+Set stricter GPS correlation window:
+
+```bash
+wp3-pro > set wardriving.gps_max_age_seconds 10
+```
+
+Select active snapshot explicitly:
+
+```bash
+wp3-pro > set wardriving.active_snapshot snapshot_2026_05_26
+```
+
+Limit snapshot history on disk:
+
+```bash
+wp3-pro > set wardriving.max_history 20
+```
+
+<Note>
+For better data quality, keep `gps_max_age_seconds` low enough to avoid linking old GPS points with new Wi-Fi detections.
+</Note>

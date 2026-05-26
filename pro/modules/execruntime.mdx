@@ -1,0 +1,61 @@
+---
+title: "exec.runtime"
+description: "Overview and usage of the WP3 Pro Exec Runtime module."
+icon: "terminal"
+---
+
+# Exec Runtime (`exec.runtime`)
+
+<Card title="exec.runtime" img="/images/pro/modules/shell.png">
+    exec.runtime Web UI Interface
+</Card>
+
+<Card title="exec.runtime" img="/images/pro/modules/execruntime.png">
+    exec.runtime CLI Interface
+</Card>
+
+The **`exec.runtime`** module provides **safe OS command execution** and **session variables** for automation workflows in **WP3 Pro**.
+It is designed to let operators run approved system commands and store command outputs for later steps.
+
+---
+
+## Available Commands
+
+### `exec`
+
+- **Description**: Safely execute allowed OS commands.
+
+```bash
+wp3-pro > exec run -- <cmd> [args]
+wp3-pro > exec capture <var> -- <cmd> [args]
+```
+
+Examples:
+
+```bash
+wp3-pro > exec run -- ip a
+wp3-pro > exec capture gateway_ip -- ip route
+```
+
+### `var`
+
+- **Description**: Manage runtime session variables.
+
+```bash
+wp3-pro > var set target_ip 192.168.1.10
+wp3-pro > var get target_ip
+wp3-pro > var list
+wp3-pro > var unset target_ip
+```
+
+---
+
+## Usage Notes
+
+- Use `exec run` when you only need to execute a command.
+- Use `exec capture` when you need to save command output into a variable for chaining automation steps.
+- Use `var` commands to inspect and maintain values during the current session.
+
+<Note>
+`exec.runtime` is intended for controlled automation. Keep command usage limited to trusted and necessary operations.
+</Note>

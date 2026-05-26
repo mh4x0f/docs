@@ -1,0 +1,98 @@
+---
+title: "bt.pan"
+description: "Overview and usage of the WP3 Pro Bluetooth PAN module."
+icon: "bluetooth"
+---
+
+# Bluetooth PAN (`bt.pan`)
+
+<Card title="bt.pan" img="/images/pro/modules/btpan.png">
+    bt.pan Web UI Interface
+</Card>
+
+
+The **`bt.pan`** module provides a **Bluetooth PAN (NAP) control channel** for Web/API access in **WP3 Pro**.
+It can start and manage PAN networking, and optionally share upstream internet to PAN clients.
+
+---
+
+## Available Commands
+
+### `bt.pan`
+
+- **Description**: Start, stop, check status, synchronize, or wait for Bluetooth PAN readiness.
+
+```bash
+wp3-pro > bt.pan on
+wp3-pro > bt.pan off
+wp3-pro > bt.pan status
+wp3-pro > bt.pan sync
+wp3-pro > bt.pan wait 15
+```
+
+### `bt.pan.inet_bridge`
+
+- **Description**: Share internet from an upstream interface to PAN clients.
+
+```bash
+wp3-pro > bt.pan.inet_bridge on wlan0
+wp3-pro > bt.pan.inet_bridge off
+wp3-pro > bt.pan.inet_bridge status
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `bt.pan.adapter` | Bluetooth adapter name. | `hci0` |
+| `bt.pan.address` | IPv4 address assigned to PAN interface. | `172.27.0.1` |
+| `bt.pan.auto_bind` | Rebind `web.ui`/`api.rest` address to `bt.pan.address` when starting the module. | `false` |
+| `bt.pan.dhcp.binary` | DHCP helper binary: `auto`, `none`, `dnsmasq`, or custom path. | `auto` |
+| `bt.pan.dhcp.dns` | DNS servers offered via DHCP (comma-separated). | `1.1.1.1,8.8.8.8` |
+| `bt.pan.dhcp.enabled` | Enable dnsmasq DHCP on PAN interface for automatic client IP assignment. | `true` |
+| `bt.pan.dhcp.lease` | DHCP lease duration (dnsmasq format, for example `1h`, `12h`). | `12h` |
+| `bt.pan.dhcp.range.end` | DHCP range end IPv4 for PAN clients (`empty` = auto). | `(empty)` |
+| `bt.pan.dhcp.range.start` | DHCP range start IPv4 for PAN clients (`empty` = auto). | `(empty)` |
+| `bt.pan.discoverable` | Set adapter discoverable state while module is running. | `true` |
+| `bt.pan.iface` | Bluetooth PAN network interface name, or `auto` to autodetect `bnep*`. | `bnep0` |
+| `bt.pan.nap.args` | Arguments for NAP helper. Use `auto` for sensible defaults. | `auto` |
+| `bt.pan.nap.binary` | NAP server helper binary: `auto`, `none`, `bt-network`, `bt-pan`, or custom path. | `auto` |
+| `bt.pan.nap.bridge` | Bridge interface used by NAP helper (for `bt-network`, `bt-pan`, `bluez-dbus`). | `pan0` |
+| `bt.pan.pairable` | Set adapter pairable state while module is running. | `true` |
+| `bt.pan.prefix` | CIDR prefix for PAN interface (`8`-`30`). | `24` |
+
+---
+
+## Examples
+
+Start PAN module and verify status:
+
+```bash
+wp3-pro > bt.pan on
+wp3-pro > bt.pan status
+```
+
+Enable automatic bind of Web/API services to PAN address:
+
+```bash
+wp3-pro > set bt.pan.auto_bind true
+```
+
+Set custom DHCP lease and DNS servers:
+
+```bash
+wp3-pro > set bt.pan.dhcp.lease 1h
+wp3-pro > set bt.pan.dhcp.dns 9.9.9.9,1.1.1.1
+```
+
+Share internet from upstream interface:
+
+```bash
+wp3-pro > bt.pan.inet_bridge on eth0
+```
+
+<Note>
+Use `bt.pan wait [seconds]` in automation flows when you need to ensure PAN is ready before starting dependent modules.
+</Note>

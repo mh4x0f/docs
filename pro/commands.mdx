@@ -161,3 +161,57 @@ show all proxies available and their status.
 > `reload`
 
 reload active proxy or a specific proxy configuration dynamically.
+
+---
+
+### Automation and Runtime Commands (`v3.0.0-beta1`)
+
+These commands improve automation safety, script composition, and session-aware operations.
+
+> `exec run -- <cmd> [args]`
+
+Execute an allowed OS command in runtime.
+
+> `exec capture <var> -- <cmd> [args]`
+
+Execute an allowed command and capture its output into a session variable.
+
+> `exec allowed`
+
+List all allowlisted OS commands available in runtime.
+
+```bash
+wp3-pro > exec allowed
+```
+
+> `var <set|get|list|unset>`
+
+Manage session-scoped variables used by automation pipelines and `.pulp` scripts.
+
+```bash
+wp3-pro > var list
+wp3-pro > var get bt.pan.inet.upstream
+```
+
+#### Pulp Variable Interpolation
+
+Capture runtime values and reuse them later in the same execution flow:
+
+```bash
+exec capture bt.pan.inet.upstream --extract=firstline -- ip route show default | grep -o "dev [^ ]*" | cut -d " " -f 2 | head -n1
+bt.pan.inet_bridge on ${bt.pan.inet.upstream}
+```
+
+This pattern helps make scripts adaptive across different network environments.
+
+---
+
+### HTTPS/TLS Quick Start Script
+
+For LAN-ready secure UI/API access with automatic certificate setup:
+
+```bash
+sudo wifipumpkin3-pro -pulp webui_https_auto_tls_lan.pulp
+```
+
+This enables native TLS for `web.ui` and `api.rest`, and can keep HTTP mirror ports for compatibility.

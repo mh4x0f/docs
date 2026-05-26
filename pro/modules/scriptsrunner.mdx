@@ -1,0 +1,149 @@
+---
+title: "scripts.runner"
+description: "Overview and usage of the WP3 Pro Scripts Runner module."
+icon: "file-code"
+---
+
+# Scripts Runner (`scripts.runner`)
+
+<Card title="scripts.runner" img="/images/pro/modules/scripts.png">
+    scripts.runner Web UI Interface
+</Card>
+
+
+The **`scripts.runner`** module provides script cataloging, validation, and execution runtime for **`.pulp` automation** in **WP3 Pro**.
+It supports script discovery, execution control, history tracking, and cancellation.
+
+---
+
+## Available Commands
+
+### `scripts.runner`
+
+- **Description**: Control and operate the script runner module.
+
+```bash
+wp3-pro > scripts.runner on
+wp3-pro > scripts.runner off
+wp3-pro > scripts.runner status
+wp3-pro > scripts.runner list
+wp3-pro > scripts.runner validate <script>
+wp3-pro > scripts.runner run <script>
+wp3-pro > scripts.runner history
+wp3-pro > scripts.runner cancel
+```
+
+### `scripts` (alias)
+
+- **Description**: Alias for common script operations.
+
+```bash
+wp3-pro > scripts status
+wp3-pro > scripts list
+wp3-pro > scripts validate <script>
+wp3-pro > scripts run <script>
+wp3-pro > scripts history
+wp3-pro > scripts cancel
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `scripts.runner.continue_on_error` | Continue script execution even when a step fails. | `false` |
+| `scripts.runner.default_timeout_sec` | Default timeout in seconds for script execution. | `120` |
+| `scripts.runner.dir` | Directory used to discover `.pulp` scripts. | `scripts` |
+| `scripts.runner.max_history` | Maximum script execution records kept in memory. | `50` |
+
+---
+
+## Examples
+
+List available scripts:
+
+```bash
+wp3-pro > scripts.runner list
+```
+
+Validate a script before execution:
+
+```bash
+wp3-pro > scripts.runner validate recon_flow.pulp
+```
+
+Run script with alias command:
+
+```bash
+wp3-pro > scripts run recon_flow.pulp
+```
+
+Allow execution to continue after step errors:
+
+```bash
+wp3-pro > set scripts.runner.continue_on_error true
+```
+
+Increase default timeout for longer workflows:
+
+```bash
+wp3-pro > set scripts.runner.default_timeout_sec 300
+```
+
+Check recent runs:
+
+```bash
+wp3-pro > scripts.runner history
+```
+
+<Note>
+Use `validate` before `run` to catch syntax or compatibility issues early in automation flows.
+</Note>
+
+---
+
+## Script Runtime Session (`exec` + `var`)
+
+In `v3.0.0-beta1`, `scripts.runner` becomes more powerful when combined with `exec.runtime` session variables.
+This allows scripts to capture runtime values and reuse them in later steps.
+
+### Core Commands Used in Scripts
+
+```bash
+wp3-pro > exec run -- <cmd> [args]
+wp3-pro > exec capture <variable.name> -- <cmd> [args]
+wp3-pro > exec allowed
+wp3-pro > var list
+wp3-pro > var get <variable.name>
+```
+
+### How It Works
+
+1. `exec capture` runs an allowlisted command and stores output in a session variable.
+2. The script reuses the value with `${variable.name}`.
+3. `var list` and `var get` help inspect active values during debugging.
+
+### Practical `.pulp` Example
+
+```bash
+# Detect current default outbound interface and store it in a session variable
+exec capture bt.pan.inet.upstream --extract=firstline -- ip route show default | grep -o "dev [^ ]*" | cut -d " " -f 2 | head -n1
+
+# Reuse captured value in next step
+bt.pan.inet_bridge on ${bt.pan.inet.upstream}
+
+# Optional visibility in logs
+log.info Upstream interface: ${bt.pan.inet.upstream}
+```
+
+### Inspecting Variables During a Session
+
+```bash
+wp3-pro > var list
+wp3-pro > var get bt.pan.inet.upstream
+```
+
+<Note>
+Use `wp3-pro > exec allowed` before building scripts to confirm which commands are available in the safe runtime.
+</Note>
