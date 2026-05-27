@@ -57,7 +57,8 @@
               "pro/installation",
               "pro/hardware",
               "pro/features/findmydevices",
-              "pro/features/scripts"
+              "pro/features/scripts",
+              "pro/features/tlssupport"
             ]
           },
           {

@@ -1,0 +1,98 @@
+---
+title: 'TLS Support'
+description: 'Native HTTPS/TLS setup flow for Web UI and API with guided verification.'
+icon: 'lock'
+---
+
+# TLS Support
+
+WP3 Pro includes native TLS support for secure access to `web.ui` and `api.rest`, with an assisted setup flow for LAN environments.
+
+### What this enables
+
+- HTTPS access for Web UI and REST API
+- Auto-TLS flow for certificate generation
+- Guided validation steps for trusted access
+
+### TLS Setup Screens
+
+<Card title="TLS Configuration" img="/images/pro/tls_settings.png">
+  Initial TLS settings and secure access configuration.
+</Card>
+
+<Card title="TLS Setup Assistant" img="/images/pro/tls_settings2.png">
+  Guided flow to prepare trust and certificate usage.
+</Card>
+
+<Card title="TLS Verification" img="/images/pro/tls_settings3.png">
+  Final verification and secure access confirmation.
+</Card>
+
+### Quick Start
+
+```bash
+sudo wifipumpkin3-pro -pulp webui_https_auto_tls_lan.pulp
+```
+
+## Default TLS Script (`webui_https_auto_tls_lan.pulp`)
+
+WP3 Pro ships with a default `.pulp` profile to enable secure LAN access for both Web UI and REST API.
+
+### What this script configures
+
+- Sets API credentials
+- Binds `api.rest` and `web.ui` to `0.0.0.0` for LAN/mobile access
+- Enables TLS auto-generation for both services
+- Keeps HTTP mirror ports enabled for compatibility
+- Starts `api.rest` and rebinds `web.ui` using current API settings
+
+### Default script content
+
+```bash
+# description: Enable Web UI + REST API on LAN with native HTTPS auto-TLS.
+
+# --- Credentials (adjust as needed) ---
+set api.rest.username root
+set api.rest.password toor
+
+# --- Listen on all interfaces so your phone can access via router LAN IP ---
+set api.rest.address 0.0.0.0
+set web.ui.address 0.0.0.0
+set api.rest.port 8443
+set web.ui.port 443
+
+set api.rest.tls.enabled true
+set api.rest.tls.auto true
+set api.rest.http.mirror.enabled true
+set api.rest.http.mirror.port 8083
+set web.ui.tls.enabled true
+set web.ui.tls.auto true
+set web.ui.http.mirror.enabled true
+set web.ui.http.mirror.port 80
+
+# IMPORTANT:
+# Replace 10.0.0.157 with your current machine LAN IP if different.
+# Keep localhost/127.0.0.1 for local access.
+set api.rest.tls.hosts localhost,127.0.0.1,10.0.0.157
+set web.ui.tls.hosts localhost,127.0.0.1,10.0.0.157
+
+# Cert files are auto-generated in:
+#   GetBasePath("certs")/
+#     - wp3_ca_cert.pem
+#     - wp3_server_cert.pem
+#     - wp3_server_key.pem
+
+# --- Apply changes ---
+api.rest on
+
+# Rebind web UI to current API settings
+web.ui on
+```
+
+<Note>
+Always replace `10.0.0.157` with the real LAN IP of your WP3 Pro host before running in your environment.
+</Note>
+
+<Note>
+For LAN/mobile usage, include your host LAN IP in TLS hosts and keep `localhost` and `127.0.0.1` for local access.
+</Note>
