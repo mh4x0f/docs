@@ -60,8 +60,8 @@ each command can either be executed singularly, or concatenated by the ; in stri
 ```
 Load and run commands automatically from a .pulp script file.
 
-```list-pulp
--v
+```bash
+-list-pulp
 ```
 List all available .pulp scripts with description.
 
@@ -92,75 +92,36 @@ show program's version number and exit.
 
 ### Core Commands
 
->  `help`
-
-list available commands or show proxy/module specific help.
-
-
-> `set`
-
-set variable ap,proxies, modules, this command set is like metasploit `set` command.(Use tab for autocomplete)
-
-
-
-> `banner`
-
-display an awesome banner.
-
-> `clear`
-
-clear the screen.
-
-> `exit`
-
-exit the program.
-
-> `update` (coming soon)
-
-pulling updates from remote git repository.
+| Command | Description |
+|---|---|
+| `banner` | display an awesome banner |
+| `exit` | exit the program |
+| `set` | set configuration values |
+| `var` | manage session variables. Usage: `var set/get/list/unset` |
+| `help` | list available commands or show proxy/module specific help |
+| `clear` | clear the screen |
+| `exec` | safely execute allowed OS commands. Usage: `exec run -- <cmd> [args]` or `exec capture <var> -- <cmd> [args]` |
+| `update` *(coming soon)* | pulling updates from remote git repository |
 
 ### Ap Commands
 
-
-> `clients`
-
-show all connected clients on AP
-
-> `ap`
-
-show all variable and status from AP. (`bssid`, `ssid`, `channel`, `security`,  or `status ap`)
-
-> `dhcp`
-
-show all config of DHCP.
-
-> `stations`
-
-display detailed info of all clients connected to the AP.
-
-> `start`
-
-Start the access point (AP). If everything is working correctly, a new AP will appear, managed by the **hostapd** program.  
-At the same time, the proxy should be initialized and ready to use.
-
-> `stop`
-
-stop access point, dns, dhcp and proxies that is running in background.
-
-> `mode`
-
-all wireless mode available
+| Command | Description |
+|---|---|
+| `clients` | show all connected clients on AP |
+| `reload` | reload active proxy or a specific proxy configuration dynamically |
+| `stop` | stop accesspoint attack |
+| `ap` | show all variable and status from AP |
+| `dhcp` | show all config of DHCP |
+| `stations` | display detailed info of all clients connected to the AP |
+| `mode` | show all wireless mode available |
+| `start` | start accesspoint attack |
 
 
 ### Network Commands
 
-> `proxies`
-
-show all proxies available and their status.
-
-> `reload`
-
-reload active proxy or a specific proxy configuration dynamically.
+| Command | Description |
+|---|---|
+| `proxies` | show all available proxies |
 
 ---
 
