@@ -4,19 +4,30 @@ description: "Handles update checks and related operations in WP3 Pro."
 icon: "download"
 ---
 
-# Update (`update`) 
+# Update (`update`)
 
-The **Update Module** allows you to check for new versions of **WP3 Pro** and manage update-related operations.  
-This module is essential to ensure that your installation is always up to date with the latest features and security patches.
+The **Update module** handles update checks and related maintenance operations for **WiFiPumpkin3-Pro**.
 
----
+## Status
 
-### Available Commands
+- `update` (**not running**): Handles update checks and related operations.
 
-#### `update.check`
+## Commands
 
-- **Description**: Check if a new update is available.
+### `update.check`
+
+- **Description**: Check for updates.
+- **Usage**:
 
 ```bash
 wp3-pro > update.check on
+```
+
+### `update.latest`
+
+- **Description**: Update WiFiPumpkin3-Pro to the latest version.
+- **Usage**:
+
+```bash
+wp3-pro > update.latest
 ```
