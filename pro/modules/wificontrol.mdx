@@ -1,0 +1,93 @@
+---
+title: "wifi.control"
+description: "Create and manage a local Wi-Fi control hotspot using hostapd."
+icon: "wifi"
+---
+
+# Wi-Fi Control (`wifi.control`)
+
+<Card title="wifi.control" img="/images/pro/modules/wifi-control.png">
+    Local Wi-Fi control hotspot for WP3 Pro service access
+</Card>
+
+The **`wifi.control`** module creates a local **Wi-Fi control network** using **hostapd**.
+It is designed to expose a dedicated management hotspot for accessing services such as **`web.ui`** and **`api.rest`**, even when no external infrastructure is available.
+
+---
+
+## Available Commands
+
+### `wifi.control`
+
+- **Description**: Start, stop, or check the status of the Wi-Fi control hotspot.
+
+```bash
+wp3-pro > wifi.control on
+wp3-pro > wifi.control off
+wp3-pro > wifi.control status
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `wifi.control.address` | IPv4 address assigned to the control hotspot. | `192.168.0.1` |
+| `wifi.control.auto_bind_services` | Expose `web.ui` and `api.rest` on all interfaces and extend TLS SANs while `wifi.control` is active. | `true` |
+| `wifi.control.auto_start_services` | Ensure `web.ui` and `api.rest` are running while `wifi.control` is active. | `true` |
+| `wifi.control.channel` | Wi-Fi channel used by the control hotspot. | `6` |
+| `wifi.control.domain` | Local domain used for dashboard access. | `control.wp3` |
+| `wifi.control.interface` | Wireless interface used by the control hotspot. | `(empty)` |
+| `wifi.control.password` | WPA2 password for the control hotspot. | `wp3control` |
+| `wifi.control.prefix` | IPv4 prefix length assigned to the control hotspot. | `24` |
+| `wifi.control.share_internet` | Share internet from an upstream interface to Wi-Fi control clients. | `false` |
+| `wifi.control.ssid` | SSID of the control hotspot. | `WP3-Control` |
+| `wifi.control.upstream_dns` | Allow DNS queries to be forwarded upstream when internet sharing is enabled. | `true` |
+| `wifi.control.upstream_dns_server` | Upstream DNS server used when internet sharing is enabled. | `8.8.8.8:53` |
+| `wifi.control.upstream_interface` | Upstream interface used for internet sharing. | `(empty)` |
+
+---
+
+## Examples
+
+Start the control hotspot with the default settings:
+
+```bash
+wp3-pro > wifi.control on
+```
+
+Create a custom SSID and password:
+
+```bash
+wp3-pro > set wifi.control.ssid WP3-Operations
+wp3-pro > set wifi.control.password strongcontrolpass
+wp3-pro > wifi.control on
+```
+
+Assign a custom address and channel:
+
+```bash
+wp3-pro > set wifi.control.address 10.10.10.1
+wp3-pro > set wifi.control.prefix 24
+wp3-pro > set wifi.control.channel 11
+```
+
+Bind the hotspot to a specific wireless interface:
+
+```bash
+wp3-pro > set wifi.control.interface wlan0
+```
+
+Enable internet sharing for connected clients:
+
+```bash
+wp3-pro > set wifi.control.share_internet true
+wp3-pro > set wifi.control.upstream_interface eth0
+wp3-pro > set wifi.control.upstream_dns_server 1.1.1.1:53
+wp3-pro > wifi.control on
+```
+
+<Warning>
+If you keep `wifi.control.auto_bind_services` enabled, `web.ui` and `api.rest` may become reachable from clients connected to the control hotspot. Review authentication, TLS, and network exposure before using this in shared environments.
+</Warning>

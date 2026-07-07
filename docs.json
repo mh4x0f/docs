@@ -76,6 +76,7 @@
               "pro/modules/batterymonitor",
               "pro/modules/btpan",
               "pro/modules/execruntime",
+              "pro/modules/mdnsdiscovery",
               "pro/modules/netsniff",
               "pro/modules/wifirecon",
               "pro/modules/webui",
@@ -92,6 +93,7 @@
               "pro/modules/sysautorun",
               "pro/modules/wificonnect",
               "pro/modules/webremote",
+              "pro/modules/wificontrol",
               "pro/modules/wifispam"
             ]
           },

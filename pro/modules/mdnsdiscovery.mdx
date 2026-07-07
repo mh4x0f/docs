@@ -1,0 +1,113 @@
+---
+title: "mdns.discovery"
+description: "Advertise and inspect WP3 services over Multicast DNS (mDNS/Bonjour)."
+icon: "radio"
+---
+
+# mDNS Discovery (`mdns.discovery`)
+
+<Card title="mdns.discovery" img="/images/pro/modules/mdns-discovery.png">
+    mDNS service advertisement and peer discovery for WP3 Pro
+</Card>
+
+The **`mdns.discovery`** module advertises WP3 Pro services over **Multicast DNS (mDNS/Bonjour)** and discovers other compatible peers on the local network.
+It is useful for zero-configuration service discovery, peer visibility, and quick identification of nearby WP3 nodes.
+
+---
+
+## Available Commands
+
+### `mdns.discovery`
+
+- **Description**: Start, stop, or check the status of the mDNS discovery service.
+
+```bash
+wp3-pro > mdns.discovery on
+wp3-pro > mdns.discovery off
+wp3-pro > mdns.discovery status
+```
+
+### `mdns.discovery.query`
+
+- **Description**: Run a single mDNS discovery round immediately.
+
+```bash
+wp3-pro > mdns.discovery.query
+```
+
+### `mdns.discovery.peers`
+
+- **Description**: List peers discovered through mDNS queries.
+
+```bash
+wp3-pro > mdns.discovery.peers
+```
+
+### `mdns.discovery.clear`
+
+- **Description**: Clear the current list of discovered peers.
+
+```bash
+wp3-pro > mdns.discovery.clear
+```
+
+---
+
+## Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `mdns.discovery.advertise_enabled` | Enable mDNS advertisement for this device. | `true` |
+| `mdns.discovery.domain` | mDNS domain suffix, usually `local`. | `local` |
+| `mdns.discovery.hostname` | Hostname advertised over mDNS. Empty uses the system hostname. | `mh4x0f-redribbon2` |
+| `mdns.discovery.instance` | Friendly mDNS service instance name. Empty uses the hostname. | `mh4x0f-redribbon2` |
+| `mdns.discovery.interface` | Network interface used for mDNS advertisement and queries. `auto` prefers the upstream interface, then the active session interface. | `auto` |
+| `mdns.discovery.query_enabled` | Enable periodic peer discovery for the configured mDNS service. | `true` |
+| `mdns.discovery.query_interval_seconds` | Interval in seconds between periodic mDNS discovery rounds. | `45` |
+| `mdns.discovery.query_service` | mDNS service name used when querying peers. | `_wp3._tcp` |
+| `mdns.discovery.query_timeout_ms` | Timeout in milliseconds for each peer discovery query. | `1500` |
+| `mdns.discovery.service` | Primary mDNS service name advertised by this device. | `_wp3._tcp` |
+| `mdns.discovery.txt.extra` | Additional comma-separated TXT records to advertise. | `(empty)` |
+| `mdns.discovery.want_unicast_response` | Request unicast DNS-SD responses when supported by peers. | `false` |
+
+---
+
+## Examples
+
+Start the module with the default service name:
+
+```bash
+wp3-pro > mdns.discovery on
+```
+
+Trigger a manual discovery round and inspect peers:
+
+```bash
+wp3-pro > mdns.discovery.query
+wp3-pro > mdns.discovery.peers
+```
+
+Change the advertised service instance and add custom TXT records:
+
+```bash
+wp3-pro > set mdns.discovery.instance WP3-Field-Node
+wp3-pro > set mdns.discovery.txt.extra role=relay,site=lab
+wp3-pro > mdns.discovery on
+```
+
+Tune the periodic discovery interval and timeout:
+
+```bash
+wp3-pro > set mdns.discovery.query_interval_seconds 30
+wp3-pro > set mdns.discovery.query_timeout_ms 2500
+```
+
+Use a specific interface for mDNS:
+
+```bash
+wp3-pro > set mdns.discovery.interface wlan0
+```
+
+<Note>
+Use the same service type in `mdns.discovery.service` and `mdns.discovery.query_service` when you want multiple WP3 Pro devices to advertise and discover one another consistently.
+</Note>
