@@ -1,0 +1,51 @@
+---
+title: "Build Devices"
+description: "Build your own compact, portable WiFiPumpkin3 hardware gadget."
+icon: "microchip"
+---
+
+<Note title="Build your own WiFiPumpkin3 gadget">
+WiFiPumpkin3 Zero is a compact, purpose-built edition of the platform designed to run on ARM64 single-board computers such as the **Raspberry Pi Zero 2 W** and **Orange Pi Zero 2W**. Despite its small footprint, it delivers a full rogue access point and field-recon toolkit in a pocket-sized package.
+</Note>
+
+![WiFiPumpkin3 Zero gadget](/images/pro/gadget3.jpeg)
+
+### Why build a gadget?
+
+- 📦 **Portable & discreet** — pocket-sized form factor for field operations
+- 🔋 **Battery-friendly** — pair with `battery.monitor` for runtime awareness
+- 🖥️ **Headless-ready** — drive everything remotely from the WebUI
+- 📟 **Optional e-paper display** — status at a glance with `epaper.ui`
+
+### Supported hardware
+
+| Device | Architecture | Notes |
+| :----- | :----------- | :---- |
+| **Raspberry Pi Zero 2 W** | arm64 (aarch64) | Recommended compact build |
+| **Orange Pi Zero 2W** | arm64 (aarch64) | Great alternative, Armbian-based |
+| **Raspberry Pi 3 / 4 / 5** | arm64 (aarch64) | More headroom and performance |
+
+<Tip>
+Use the `arm64` release build (`wifipumpkin3-pro_linux_arm64.zip`) and follow the standard [Installation](/pro/installation) steps. An external Wi-Fi adapter with **AP mode** support is still required — see [Hardware](/pro/hardware).
+</Tip>
+
+### Related blog posts
+
+Step-by-step guides for building and configuring your own gadget:
+
+| Date | Post |
+| :--- | :--- |
+| Jan 02, 2026 | [Build a wifipumpkin3 Zero Gadget](https://wifipumpkin3.com/blog/build-a-wifipumpkin3-zero-gadget/) |
+| Jan 23, 2026 | [📟 Configuring the WiFiPumpkin3 Zero Gadget](https://wifipumpkin3.com/blog/configuring-the-wifipumpkin3-zero-gadget/) |
+| Sep 29, 2025 | [Running WiFiPumpkin3 Pro on Raspberry Pi Zero 2 W](https://wifipumpkin3.com/blog/running-wifipumpkin3-pro-on-raspberry-pi-zero-2-w/) |
+| May 28, 2026 | [Fix DNS Port 53 Conflict on Armbian (Orange Pi Zero 2W)](https://wifipumpkin3.com/blog/fix-dns-port-53-conflict-on-armbian-orange-pi-zero-2w/) |
+
+<Card
+  title="See all posts"
+  icon="newspaper"
+  href="https://wifipumpkin3.com/blog"
+  arrow="true"
+  cta="Visit the blog"
+>
+  Releases, hardware builds, and field guides from the official WiFiPumpkin3 blog.
+</Card>

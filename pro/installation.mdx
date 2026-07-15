@@ -7,7 +7,22 @@ icon: "terminal"
 ### OBS
 
 - Windows and Mac OS X is not supported.
-- Only Linux amd64 (arm64 future)
+- Linux **amd64** and **arm64 (aarch64)** are supported.
+
+### Supported architectures & devices
+
+`wifipumpkin3-pro` runs on both desktop-class `amd64` machines and `arm64` single-board computers (SBCs), making it ideal for portable, headless, and battery-powered deployments.
+
+| Architecture | Supported | Example devices |
+| :----------- | :-------- | :-------------- |
+| **amd64 (x86_64)** | ✅ | Desktops, laptops, VMs |
+| **arm64 (aarch64)** | ✅ | Raspberry Pi Zero 2 W, Raspberry Pi 3/4/5, Orange Pi Zero 2W, and other ARM64 SBCs |
+
+<Note>💡 On ARM64 SBCs such as the **Raspberry Pi Zero 2 W** and **Orange Pi Zero 2W**, download the `arm64` release build (`wifipumpkin3-pro_linux_arm64.zip`). The installation steps below are identical across architectures.</Note>
+
+<Tip title="Build your own gadget">
+Want a compact, purpose-built WiFiPumpkin3 device? See the [Build Devices](/pro/features/builddevices) guide for a portable Raspberry Pi Zero 2 W build.
+</Tip>
 
 ### Requirements
 
